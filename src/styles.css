@@ -1,12 +1,11 @@
 @charset "UTF-8";
 .logo-grande {
-    width: 70px;
-    height: auto;
+  width: 70px;
+  height: auto;
 }
 body{
-    margin: auto;
+  margin: auto;
 }
-
 :root,
 [data-bs-theme=light] {
   --bs-blue: #1d3b53;
@@ -85,7 +84,7 @@ body{
   --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
-  --bs-body-font-family: "DM Sans", sans-serif;
+  --bs-body-font-family: "Montserrat Alternates", sans-serif;
   --bs-body-font-size: 1rem;
   --bs-body-font-weight: 400;
   --bs-body-line-height: 1.5;
@@ -223,7 +222,7 @@ hr {
 h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
   margin-top: 0;
   margin-bottom: 0.5rem;
-  font-family: "Poppins", sans-serif;
+  font-family: "Delius Unicase", cursive;
   font-weight: 700;
   line-height: 1.25;
   color: var(--bs-heading-color, inherit);
@@ -6697,7 +6696,7 @@ textarea.form-control-lg {
   display: block;
   padding: var(--bs-tooltip-arrow-height);
   margin: var(--bs-tooltip-margin);
-  font-family: "DM Sans", sans-serif;
+  font-family: "Montserrat Alternates", sans-serif;
   font-style: normal;
   font-weight: 500;
   line-height: 1.5;
@@ -6807,7 +6806,7 @@ textarea.form-control-lg {
   z-index: var(--bs-popover-zindex);
   display: block;
   max-width: var(--bs-popover-max-width);
-  font-family: "DM Sans", sans-serif;
+  font-family: "Montserrat Alternates", sans-serif;
   font-style: normal;
   font-weight: 500;
   line-height: 1.5;
@@ -19310,7 +19309,7 @@ input[type=date]::-webkit-calendar-picker-indicator {
 }
 
 .form-control-inline .form-control-inline-text {
-  font-family: "Poppins", sans-serif;
+  font-family: "Delius Unicase", cursive;
   font-size: 3rem;
   font-weight: 700;
   line-height: 1.8;
@@ -19320,7 +19319,7 @@ input[type=date]::-webkit-calendar-picker-indicator {
 .form-control-inline .form-control {
   min-width: 200px;
   max-width: 700px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Delius Unicase", cursive;
   font-size: 3rem;
   font-weight: 700;
   line-height: 1.25;
@@ -19360,7 +19359,7 @@ input[type=date]::-webkit-calendar-picker-indicator {
   background: transparent;
 }
 .form-control-inline .choices .choices__inner .choices__item {
-  font-family: "Poppins", sans-serif;
+  font-family: "Delius Unicase", cursive;
   font-size: 3rem;
   font-weight: 700;
   line-height: 1.25;
@@ -20800,11 +20799,11 @@ a.text-primary-hover:hover, button.text-primary-hover:hover {
 }
 
 .font-base {
-  font-family: "DM Sans", sans-serif !important;
+  font-family: "Montserrat Alternates", sans-serif !important;
 }
 
 .font-heading {
-  font-family: "Poppins", sans-serif !important;
+  font-family: "Delius Unicase", cursive !important;
 }
 
 .grayscale {
