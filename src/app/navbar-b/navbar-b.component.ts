@@ -1,0 +1,12 @@
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-navbar-b',
+  standalone: true,
+  imports: [],
+  templateUrl: './navbar-b.component.html',
+  styleUrl: './navbar-b.component.css'
+})
+export class NavbarBComponent {
+
+}
