@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "public": "dist/KidTalesWEB",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
