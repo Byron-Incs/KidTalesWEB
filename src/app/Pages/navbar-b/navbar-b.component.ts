@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
   styleUrl: './navbar-b.component.css'
 })
 export class NavbarBComponent {
-  logOut() {
+  logOut(): void {
     console.log('La función se ha ejecutado');
   }
 }

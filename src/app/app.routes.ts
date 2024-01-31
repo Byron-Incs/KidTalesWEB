@@ -82,7 +82,6 @@ export const routes: Routes = [
     HomeComponent,
     AboutComponent,
     ForgotpasswordComponent,
-    JoinComponent,
     LoginComponent,
     PagenotfoundComponent,
     SupportComponent,
@@ -94,7 +93,8 @@ export const routes: Routes = [
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    JoinComponent,
   ],
   providers: [],
   bootstrap: []

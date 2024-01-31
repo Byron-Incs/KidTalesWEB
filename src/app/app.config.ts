@@ -8,6 +8,7 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 
 import { initializeApp } from "firebase/app";
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 const firebaseConfig = {
   apiKey: "AIzaSyByRMv40h5tVDQkI5vwtQLT1DfWWvCnOAc",
@@ -22,11 +23,6 @@ const firebaseConfig = {
 initializeApp(firebaseConfig);
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes),    
-  importProvidersFrom(
-    HttpClientModule,
-    AngularFireAuthModule,
-    AngularFireModule.initializeApp(firebaseConfig),
-    AngularFirestoreModule
-  ) ]
+  providers: [provideRouter(routes),
+    importProvidersFrom(HttpClientModule, AngularFireAuthModule, AngularFireModule.initializeApp(firebaseConfig), AngularFirestoreModule), provideAnimations()]
 };
