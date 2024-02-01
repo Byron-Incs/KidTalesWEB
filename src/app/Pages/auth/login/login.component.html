@@ -30,19 +30,25 @@
                                     <p class="mb-0">¿Nuevo aquí?<a href="/auth/join"> Crea una cuenta</a></p>
 
                                     <!-- Form START -->
-                                    <form class="mt-4 text-start">
+                                    <form class="mt-4 text-start" [formGroup]="form" (ngSubmit)="logIn()">
                                         <!-- Email -->
                                         <div class="mb-3">
                                             <label class="form-label">Email</label>
-                                            <input type="email" class="form-control" name="email" id="email">
+                                            <input class="form-control" matInput formControlName="email">
+                                            <mat-error> Correo incorrecto </mat-error>
                                         </div>
                                         <!-- Password -->
                                         <div class="mb-3 position-relative">
                                             <label class="form-label">Contraseña</label>
-                                            <input class="form-control fakepassword" type="password" name="pasword" id="pasword">
+                                            <input class="form-control fakepassword" matInput
+                                                [type]="hide ? 'password' : 'text'" formControlName="password" />
                                             <span class="position-absolute top-50 end-0 translate-middle-y p-0 mt-3">
-                                                <i class="fakepasswordicon fas fa-eye-slash cursor-pointer p-2"></i>
+                                                <button mat-icon-button matSuffix (click)="hide = !hide"
+                                                    [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                                    <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+                                                </button>
                                             </span>
+                                            <mat-error>Este campo es requerido</mat-error>
                                         </div>
                                         <!-- Remember me -->
                                         <div class="mb-3 d-sm-flex justify-content-between">
@@ -50,24 +56,32 @@
                                             <a href="/forgotpassword">¿Olvidaste tu contraseña?</a>
                                         </div>
                                         <!-- Button -->
-                                        <div><button type="submit" class="btn btn-primary w-100 mb-0" name = "accion" id="accion" value ="Guardar">Ingresar</button></div>
+                                        <div><button type="submit" class="btn btn-primary w-100 mb-0" name="accion"
+                                                id="accion" value="Guardar">Ingresar</button></div>
                                         <!-- Divider -->
-									<div class="position-relative my-4">
-										<hr>
-										<p class="small bg-mode position-absolute top-50 start-50 translate-middle px-2">O inicia sesión con</p>
-									</div>
-		
-									<!-- Google and iOS button -->
-									<div class="vstack gap-3">
-										<a href="#" class="btn btn-light mb-0"><i class="fab fa-fw fa-google text-google-icon me-2"></i>Inicia sesión con Google</a>
-										<a href="#" class="btn btn-light mb-0"><i class="fab fa-fw fa-apple text-apple-icon me-2"></i>Inicia sesión con iOS</a>
-									</div>
-		
+                                        <div class="position-relative my-4">
+                                            <hr>
+                                            <p
+                                                class="small bg-mode position-absolute top-50 start-50 translate-middle px-2">
+                                                O inicia sesión con</p>
+                                        </div>
+
+                                        <!-- Google and iOS button -->
+                                        <div class="vstack gap-3">
+                                            <a href="#" class="btn btn-light mb-0"><i
+                                                    class="fab fa-fw fa-google text-google-icon me-2"></i>Inicia sesión
+                                                con Google</a>
+                                            <a href="#" class="btn btn-light mb-0"><i
+                                                    class="fab fa-fw fa-apple text-apple-icon me-2"></i>Inicia sesión
+                                                con iOS</a>
+                                        </div>
+
                                         <!-- Copyright -->
-                                        <div class="text-primary-hover mt-3 text-center"> Copyrights © 2023 Byron Inc</div>
+                                        <div class="text-primary-hover mt-3 text-center"> Copyrights © 2023 Byron Inc
+                                        </div>
                                     </form>
                                     <!-- Form END -->
-                                </div>		
+                                </div>
                             </div>
                         </div>
                     </div>
