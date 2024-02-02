@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { Router, RouterModule } from '@angular/router';
+import { AuthService, Credential } from '../../../core/services/auth.service';
 
 interface SignUpForm {
   email: FormControl<string>;
@@ -60,8 +61,21 @@ export class JoinComponent {
     }),
   });
 
-  signUp(): void{
+  private authService = inject(AuthService);
+
+  async signUp(): Promise<void>{
     if (this.form.invalid) return;
-    console.log(this.form.value);
+
+    const credential: Credential = {
+      email: this.form.value.email || '',
+      password: this.form.value.password  || '',
+    }
+
+    try {
+      await this.authService.signUpWithEmailAndPassword(credential);
+      this._router.navigateByUrl('/');
+    } catch (error) {
+      console.error(error);
+    }
   }
 }
