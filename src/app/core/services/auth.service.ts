@@ -14,6 +14,7 @@ export interface Credential {
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthService {
   private auth: Auth = inject(Auth);
 

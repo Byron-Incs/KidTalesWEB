@@ -6,7 +6,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-
+import { NgIf } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
@@ -18,7 +18,6 @@ interface SignUpForm {
   email: FormControl<string>;
   nombre: FormControl<string>;
   password: FormControl<string>;
-  confirmPassword: FormControl<string>;
 }
 
 @Component({
@@ -30,6 +29,7 @@ interface SignUpForm {
     MatButtonModule,
     ReactiveFormsModule,
     RouterModule,
+    NgIf,
   ],
   selector: 'app-join',
   templateUrl: './join.component.html',
@@ -55,13 +55,24 @@ export class JoinComponent {
       validators: Validators.required,
       nonNullable: true,
     }),
-    confirmPassword: this.formBuilder.control('', {
-      validators: Validators.required,
-      nonNullable: true,
-    }),
   });
 
   private authService = inject(AuthService);
+  private _router = inject(Router);
+
+  get isEmailValid() : string | boolean {
+    const control = this.form.get('email');
+
+    const isInvalid = control?.invalid && control.touched;
+
+    if (isInvalid) {
+      return control.hasError('required')
+        ? 'Este campo es requerido'
+        : 'Ingresa un correo válido';
+    }
+
+    return false;
+  }
 
   async signUp(): Promise<void>{
     if (this.form.invalid) return;
