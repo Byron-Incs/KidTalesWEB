@@ -13,6 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService, Credential } from '../../../core/services/auth.service';
+import { error } from 'console';
 
 interface SignUpForm {
   email: FormControl<string>;
@@ -83,8 +84,11 @@ export class JoinComponent {
     }
 
     try {
-      await this.authService.signUpWithEmailAndPassword(credential);
-      this._router.navigateByUrl('/');
+      const userCredentials = await this.authService.signUpWithEmailAndPassword(
+        credential
+      );
+      console.log(userCredentials);
+      this._router.navigateByUrl('user/user');
     } catch (error) {
       console.error(error);
     }

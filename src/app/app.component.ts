@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { NavbarBComponent } from './Pages/navbar-b/navbar-b.component';
-import { NavbarAComponent } from './Pages/navbar-a/navbar-a.component';
-import { FooterAComponent } from './Pages/footer-a/footer-a.component';
-import { FooterBComponent } from './Pages/footer-b/footer-b.component';
+import { NavbarBComponent } from './Pages/commponents/navbar-b/navbar-b.component';
+import { NavbarAComponent } from './Pages/commponents/navbar-a/navbar-a.component';
+import { FooterAComponent } from './Pages/commponents/footer-a/footer-a.component';
+import { FooterBComponent } from './Pages/commponents/footer-b/footer-b.component';
 
 @Component({
   selector: 'app-root',
