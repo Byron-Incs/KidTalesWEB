@@ -16,6 +16,8 @@ import { MatButtonModule } from '@angular/material/button';
 
 import { AuthService, Credential } from '../../../core/services/auth.service';
 
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+
 interface LogInForm {
   email: FormControl<string>;
   password: FormControl<string>;
@@ -31,6 +33,7 @@ interface LogInForm {
     ReactiveFormsModule,
     RouterModule,
     NgIf,
+    MatSnackBarModule,
   ],
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -45,6 +48,8 @@ export class LoginComponent {
   private authService = inject(AuthService);
 
   private router = inject(Router);
+
+  private _snackBar = inject(MatSnackBar);
 
   form: FormGroup<LogInForm> = this.formBuilder.group({
     email: this.formBuilder.control('', {
@@ -71,7 +76,7 @@ export class LoginComponent {
     return false;
   }
 
-  async logIn(): Promise<void>{
+  async logIn(): Promise<void> {
     if (this.form.invalid) return;
 
     const credential: Credential = {
@@ -81,9 +86,21 @@ export class LoginComponent {
 
     try {
       await this.authService.logInWithEmailAndPassword(credential);
-      this.router.navigateByUrl('user/user');
+      const snackBarRef = this.openSnackBar();
+
+      snackBarRef.afterDismissed().subscribe(() => {
+        this.router.navigateByUrl('user/user');
+      });
     } catch (error) {
       console.error(error);
     }
+  }
+
+  openSnackBar() {
+    return this._snackBar.open('Sesión iniciada correctamente 😀', 'Cerrar', {
+      duration: 2500,
+      verticalPosition: 'top',
+      horizontalPosition: 'end',
+    });
   }
 }

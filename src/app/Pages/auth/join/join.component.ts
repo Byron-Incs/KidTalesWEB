@@ -15,6 +15,8 @@ import { Router, RouterModule } from '@angular/router';
 import { AuthService, Credential } from '../../../core/services/auth.service';
 import { error } from 'console';
 
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+
 interface SignUpForm {
   email: FormControl<string>;
   nombre: FormControl<string>;
@@ -31,6 +33,7 @@ interface SignUpForm {
     ReactiveFormsModule,
     RouterModule,
     NgIf,
+    MatSnackBarModule,
   ],
   selector: 'app-join',
   templateUrl: './join.component.html',
@@ -60,8 +63,9 @@ export class JoinComponent {
 
   private authService = inject(AuthService);
   private _router = inject(Router);
+  private _snackBar = inject(MatSnackBar);
 
-  get isEmailValid() : string | boolean {
+  get isEmailValid(): string | boolean {
     const control = this.form.get('email');
 
     const isInvalid = control?.invalid && control.touched;
@@ -75,22 +79,33 @@ export class JoinComponent {
     return false;
   }
 
-  async signUp(): Promise<void>{
+  async signUp(): Promise<void> {
     if (this.form.invalid) return;
 
     const credential: Credential = {
       email: this.form.value.email || '',
-      password: this.form.value.password  || '',
+      password: this.form.value.password || '',
     }
 
     try {
-      const userCredentials = await this.authService.signUpWithEmailAndPassword(
+      await this.authService.signUpWithEmailAndPassword(
         credential
       );
-      console.log(userCredentials);
-      this._router.navigateByUrl('user/user');
+      const snackBarRef = this.openSnackBar();
+
+      snackBarRef.afterDismissed().subscribe(() => {
+        this._router.navigateByUrl('user/user');
+      });
     } catch (error) {
       console.error(error);
     }
+  }
+
+  openSnackBar() {
+    return this._snackBar.open('Registrado con éxito 😀', 'Cerrar', {
+      duration: 2500,
+      verticalPosition: 'top',
+      horizontalPosition: 'end',
+    });
   }
 }
