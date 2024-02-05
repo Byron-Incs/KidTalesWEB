@@ -3,12 +3,14 @@
 
 <body>
 
-<app-navbar-a></app-navbar-a>
-
-<router-outlet></router-outlet>
-
-<app-footer-a></app-footer-a>
-
+    <app-navbar-a *ngIf="!isLoggedIn"></app-navbar-a>
+    <app-navbar-b *ngIf="isLoggedIn"></app-navbar-b>
+    
+    <router-outlet></router-outlet>
+    
+    <app-footer-a *ngIf="!isLoggedIn"></app-footer-a>
+    <app-footer-b *ngIf="isLoggedIn"></app-footer-b>
+    
 </body>
 
 </html>

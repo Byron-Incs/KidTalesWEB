@@ -13,8 +13,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService, Credential } from '../../../core/services/auth.service';
-import { error } from 'console';
-
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 interface SignUpForm {
@@ -91,6 +89,7 @@ export class JoinComponent {
       await this.authService.signUpWithEmailAndPassword(
         credential
       );
+      this.authService.login();
       const snackBarRef = this.openSnackBar();
 
       snackBarRef.afterDismissed().subscribe(() => {

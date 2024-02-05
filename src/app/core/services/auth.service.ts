@@ -5,6 +5,7 @@ import { Auth,
           createUserWithEmailAndPassword,
           signInWithEmailAndPassword
         } from '@angular/fire/auth';
+import { BehaviorSubject } from 'rxjs';
 
 export interface Credential {
   email: string;
@@ -17,8 +18,10 @@ export interface Credential {
 
 export class AuthService {
   private auth: Auth = inject(Auth);
+  private readonly _isLoggedIn = new BehaviorSubject<boolean>(false);
 
   readonly authState$ = authState(this.auth);
+  readonly isLoggedIn$ = this._isLoggedIn.asObservable();
 
   signUpWithEmailAndPassword(credential: Credential): Promise<UserCredential> {
     return createUserWithEmailAndPassword(
@@ -33,10 +36,18 @@ export class AuthService {
       this.auth,
       credential.email,
       credential.password
-    );
+    ) .then(() => this.login());
   }
 
   logOut(): Promise<void>{
-    return this.auth.signOut();
+    return this.auth.signOut().then(() => this.logout());
+  }
+
+  login() {
+    this._isLoggedIn.next(true);
+  }
+
+  logout() {
+    this._isLoggedIn.next(false);
   }
 }
