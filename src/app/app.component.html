@@ -3,14 +3,14 @@
 
 <body>
 
-    <app-navbar-a *ngIf="!isLoggedIn"></app-navbar-a>
-    <app-navbar-b *ngIf="isLoggedIn"></app-navbar-b>
-    
+    <app-navbar-b *ngIf="(isLoggedIn$ | async) as loggedIn"></app-navbar-b>
+    <app-navbar-a *ngIf="!(isLoggedIn$ | async) as loggedIn"></app-navbar-a>
+
     <router-outlet></router-outlet>
-    
-    <app-footer-a *ngIf="!isLoggedIn"></app-footer-a>
-    <app-footer-b *ngIf="isLoggedIn"></app-footer-b>
-    
+
+    <app-footer-a *ngIf="!(isLoggedIn$ | async) as loggedIn"></app-footer-a>
+    <app-footer-b *ngIf="(isLoggedIn$ | async) as loggedIn"></app-footer-b>
+
 </body>
 
 </html>
