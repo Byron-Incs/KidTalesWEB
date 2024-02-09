@@ -1,12 +1,10 @@
-import { Injectable } from '@angular/core';
-import {
-  Auth,
-  UserCredential,
-  authState,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signOut,
-} from '@angular/fire/auth';
+import { Injectable, inject } from '@angular/core';
+import { Auth,
+          UserCredential,
+          authState,
+          createUserWithEmailAndPassword,
+          signInWithEmailAndPassword
+        } from '@angular/fire/auth';
 import { BehaviorSubject } from 'rxjs';
 
 export interface Credential {
@@ -15,30 +13,41 @@ export interface Credential {
 }
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
-export class AuthService {
-  private readonly _isLoggedIn = new BehaviorSubject<boolean>(false);
 
-  constructor(private auth: Auth) {
-    // Suscripción a authState$ para actualizar _isLoggedIn
-    this.authState$.subscribe((user) => {
-      this._isLoggedIn.next(!!user);
-    });
-  }
+export class AuthService {
+  private auth: Auth = inject(Auth);
+  private readonly _isLoggedIn = new BehaviorSubject<boolean>(false);
 
   readonly authState$ = authState(this.auth);
   readonly isLoggedIn$ = this._isLoggedIn.asObservable();
 
   signUpWithEmailAndPassword(credential: Credential): Promise<UserCredential> {
-    return createUserWithEmailAndPassword(this.auth, credential.email, credential.password);
+    return createUserWithEmailAndPassword(
+      this.auth,
+      credential.email,
+      credential.password
+      );
   }
 
-  logInWithEmailAndPassword(credential: Credential) {
-    return signInWithEmailAndPassword(this.auth, credential.email, credential.password);
+  logInWithEmailAndPassword(credential: Credential){
+    return signInWithEmailAndPassword(
+      this.auth,
+      credential.email,
+      credential.password
+    ) .then(() => this.login());
   }
 
-  logOut(): Promise<void> {
-    return signOut(this.auth);
+  logOut(): Promise<void>{
+    return this.auth.signOut().then(() => this.logout());
+  }
+
+  login() {
+    this._isLoggedIn.next(true);
+  }
+
+  logout() {
+    this._isLoggedIn.next(false);
   }
 }

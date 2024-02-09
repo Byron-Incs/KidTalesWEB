@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from './core/services/auth.service';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
@@ -14,11 +14,14 @@ import { FooterBComponent } from './Pages/commponents/footer-b/footer-b.componen
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent{
+export class AppComponent implements OnInit {
   title = 'KidTalesWEB';
 
-  isLoggedIn$ = this.authService.isLoggedIn$;
+  isLoggedIn = false;
 
   constructor(private authService: AuthService) {}
 
+  ngOnInit() {
+    this.authService.isLoggedIn$.subscribe(isLoggedIn => this.isLoggedIn = isLoggedIn);
+  }
 }

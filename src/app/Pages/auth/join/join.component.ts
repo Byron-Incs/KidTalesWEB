@@ -89,6 +89,7 @@ export class JoinComponent {
       await this.authService.signUpWithEmailAndPassword(
         credential
       );
+      this.authService.login();
       const snackBarRef = this.openSnackBar();
 
       snackBarRef.afterDismissed().subscribe(() => {
