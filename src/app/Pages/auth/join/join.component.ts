@@ -15,6 +15,8 @@ import { Router, RouterModule } from '@angular/router';
 import { AuthService, Credential } from '../../../core/services/auth.service';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
+import { ButtonProviders } from '../components/button-providers/button-providers.component';
+
 interface SignUpForm {
   email: FormControl<string>;
   nombre: FormControl<string>;
@@ -32,6 +34,7 @@ interface SignUpForm {
     RouterModule,
     NgIf,
     MatSnackBarModule,
+    ButtonProviders,
   ],
   selector: 'app-join',
   templateUrl: './join.component.html',

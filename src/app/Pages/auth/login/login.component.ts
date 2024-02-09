@@ -18,6 +18,8 @@ import { AuthService, Credential } from '../../../core/services/auth.service';
 
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
+import { ButtonProviders } from '../components/button-providers/button-providers.component';
+
 interface LogInForm {
   email: FormControl<string>;
   password: FormControl<string>;
@@ -34,6 +36,7 @@ interface LogInForm {
     RouterModule,
     NgIf,
     MatSnackBarModule,
+    ButtonProviders,
   ],
   selector: 'app-login',
   templateUrl: './login.component.html',

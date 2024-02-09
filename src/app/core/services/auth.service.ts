@@ -1,9 +1,12 @@
 import { Injectable, inject } from '@angular/core';
 import { Auth,
-          UserCredential,
-          authState,
-          createUserWithEmailAndPassword,
-          signInWithEmailAndPassword
+         AuthProvider,
+         GoogleAuthProvider,
+         UserCredential,
+         authState,
+         createUserWithEmailAndPassword,
+         signInWithEmailAndPassword,
+         signInWithPopup,
         } from '@angular/fire/auth';
 import { BehaviorSubject } from 'rxjs';
 
@@ -41,6 +44,28 @@ export class AuthService {
 
   logOut(): Promise<void>{
     return this.auth.signOut().then(() => this.logout());
+  }
+
+  signInWithGoogleProvider(): Promise<UserCredential> {
+    const provider = new GoogleAuthProvider();
+
+    return this.callPopUp(provider);
+  }
+
+  /*signInWithIosProvider(): Promise<UserCredential> {
+    const provider = new AppleAuthProvider();
+
+    return this.callPopUp(provider);
+  }*/
+
+  async callPopUp(provider: AuthProvider): Promise<UserCredential> {
+    try {
+      const result = await signInWithPopup(this.auth, provider);
+
+      return result;
+    } catch (error: any) {
+      return error;
+    }
   }
 
   login() {
