@@ -33,7 +33,7 @@
                                     <form class="mt-4 text-start" [formGroup]="form" (ngSubmit)="signUp()">
                                         <!-- Email -->
                                         <div class="mb-3">
-                                            <mat-form-field>
+                                            <mat-form-field class="w-100">
                                                 <mat-label class="form-label">Email</mat-label>
                                                 <input class="form-control" matInput formControlName="email" />
                                                 <mat-error *ngIf="isEmailValid as messsage">{{ messsage }}</mat-error>
@@ -41,7 +41,7 @@
                                         </div>
                                         <!-- Nombre de usuario-->
                                         <div class="mb-3">
-                                            <mat-form-field>
+                                            <mat-form-field class="w-100">
                                                 <mat-label class="form-label">Nombre de Usuario</mat-label>
                                                 <input class="form-control" matInput formControlName="nombre" />
                                                 <mat-error style="color: #FD6868;">Este campo es requerrido</mat-error>
@@ -49,12 +49,12 @@
                                         </div>
                                         <!-- Password -->
                                         <div class="mb-3 position-relative">
-                                            <mat-form-field>
+                                            <mat-form-field class="w-100">
                                                 <mat-label class="form-label">Contraseña</mat-label>
                                                 <input class="form-control fakepassword" matInput
                                                     [type]="hide ? 'password' : 'text'" formControlName="password" />
                                                 <span
-                                                    class="position-absolute top-50 end-0 translate-middle-y p-0 mt-1">
+                                                    class="position-absolute top-50 end-0 translate-middle-y p-0 mt-0">
                                                     <button mat-icon-button matSuffix (click)="hide = !hide"
                                                         [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                                                         <mat-icon>{{ hide ? "visibility_off" : "visibility"
