@@ -5,12 +5,18 @@
 
     <app-navbar-a *ngIf="!isLoggedIn"></app-navbar-a>
     <app-navbar-b *ngIf="isLoggedIn"></app-navbar-b>
-    
+
     <router-outlet></router-outlet>
-    
-    <app-footer-a *ngIf="!isLoggedIn"></app-footer-a>
-    <app-footer-b *ngIf="isLoggedIn"></app-footer-b>
-    
+
+    @if(isLoggedIn) {
+    <app-footer-b></app-footer-b>
+    }
+    @else {
+    <app-footer-a></app-footer-a>
+    }
+
+
+
 </body>
 
 </html>
