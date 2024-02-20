@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { AuthService } from '../../../core/services/auth.service';
 import { Router } from '@angular/router';
+import { getAuth, signOut } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-navbar-b',
@@ -14,12 +15,17 @@ export class NavbarBComponent {
 
   private authservice = inject(AuthService)
 
-  async logOut(): Promise<void> {
-    try {
-      await this.authservice.logOut();
-      this._router.navigateByUrl('/');
-    } catch (error) {
-      console.log(error)
-    }
+  // async logOut(): Promise<void> {
+  //   try {
+  //     await this.authservice.logOut();
+  //     this._router.navigateByUrl('/');
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
+
+  logOut() {
+    const auth = getAuth();
+    signOut(auth).then(() => this._router.navigateByUrl('/'));
   }
 }

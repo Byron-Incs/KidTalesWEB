@@ -3,6 +3,7 @@
 
 <body>
 
+    @if(!loading) {
     <app-navbar-a *ngIf="!isLoggedIn"></app-navbar-a>
     <app-navbar-b *ngIf="isLoggedIn"></app-navbar-b>
 
@@ -13,6 +14,7 @@
     }
     @else {
     <app-footer-a></app-footer-a>
+    }
     }
 
 
