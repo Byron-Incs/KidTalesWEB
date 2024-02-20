@@ -6,6 +6,8 @@ import { NavbarBComponent } from './Pages/commponents/navbar-b/navbar-b.componen
 import { NavbarAComponent } from './Pages/commponents/navbar-a/navbar-a.component';
 import { FooterAComponent } from './Pages/commponents/footer-a/footer-a.component';
 import { FooterBComponent } from './Pages/commponents/footer-b/footer-b.component';
+import { getAuth } from '@angular/fire/auth';
+import { onAuthStateChanged } from 'firebase/auth';
 
 @Component({
   selector: 'app-root',
@@ -18,10 +20,16 @@ export class AppComponent implements OnInit {
   title = 'KidTalesWEB';
 
   isLoggedIn = false;
+  loading = true;
 
   constructor(private authService: AuthService) {}
 
   ngOnInit() {
-    this.authService.isLoggedIn$.subscribe(isLoggedIn => this.isLoggedIn = isLoggedIn);
+    // this.authService.isLoggedIn$.subscribe(isLoggedIn => this.isLoggedIn = isLoggedIn);
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      this.isLoggedIn = user != undefined && user != null;
+      this.loading = false;
+    });
   }
 }
