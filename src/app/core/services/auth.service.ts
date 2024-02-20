@@ -61,7 +61,7 @@ export class AuthService {
   async callPopUp(provider: AuthProvider): Promise<UserCredential> {
     try {
       const result = await signInWithPopup(this.auth, provider);
-
+      this.login();
       return result;
     } catch (error: any) {
       return error;
