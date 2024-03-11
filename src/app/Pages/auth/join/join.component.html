@@ -44,7 +44,7 @@
                                             <mat-form-field class="w-100">
                                                 <mat-label class="form-label">Nombre de Usuario</mat-label>
                                                 <input class="form-control" matInput formControlName="nombre" />
-                                                <mat-error style="color: #FD6868;">Este campo es requerrido</mat-error>
+                                                <mat-error >Este campo es requerrido</mat-error>
                                             </mat-form-field>
                                         </div>
                                         <!-- Password -->
@@ -61,7 +61,9 @@
                                                             }}</mat-icon>
                                                     </button>
                                                 </span>
-                                                <mat-error style="color: #FD6868;">Este campo es requerrido</mat-error>
+                                                <mat-error *ngIf="passwordErrorMessage">
+                                                    {{ passwordErrorMessage }}
+                                                  </mat-error>
                                             </mat-form-field>
                                         </div>
                                         <!-- Button -->

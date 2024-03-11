@@ -57,7 +57,7 @@ export class JoinComponent {
       nonNullable: true,
     }),
     password: this.formBuilder.control('', {
-      validators: Validators.required,
+      validators: [Validators.required, Validators.minLength(7)],
       nonNullable: true,
     }),
   });
@@ -77,6 +77,20 @@ export class JoinComponent {
         : 'Ingresa un correo válido';
     }
 
+    return false;
+  }
+
+  get passwordErrorMessage(): string | boolean {
+    const control = this.form.get('password');
+  
+    if (control?.invalid && control.touched) {
+      if (control.hasError('required')) {
+        return 'Este campo es obligatorio';
+      } else if (control.hasError('minlength')) {
+        return 'La contraseña debe tener al menos 7 caracteres';
+      }
+    }
+  
     return false;
   }
 
