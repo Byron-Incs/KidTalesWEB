@@ -81,7 +81,7 @@ export class ForgotpasswordComponent {
     try {
       await this.authService.resetPassword(email);
       this.openSnackBar('¡Se ha enviado un correo electrónico para restablecer su contraseña!');
-      this.router.navigateByUrl('/login');
+      this.router.navigateByUrl('/auth/login');
     } catch (error) {
       console.error(error);
       this.openSnackBar('Error al restablecer la contraseña. Intente nuevamente.');
