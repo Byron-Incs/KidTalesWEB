@@ -7,6 +7,7 @@ import { Auth,
          createUserWithEmailAndPassword,
          signInWithEmailAndPassword,
          signInWithPopup,
+         sendPasswordResetEmail,
         } from '@angular/fire/auth';
 import { BehaviorSubject } from 'rxjs';
 
@@ -74,5 +75,14 @@ export class AuthService {
 
   logout() {
     this._isLoggedIn.next(false);
+  }
+
+  async resetPassword(email: string): Promise<void> {
+    try {
+      await sendPasswordResetEmail(this.auth, email);
+      console.log('Password reset email sent successfully!');
+    } catch (error) { 
+      console.error('Error sending password reset email:', error);
+    }
   }
 }
