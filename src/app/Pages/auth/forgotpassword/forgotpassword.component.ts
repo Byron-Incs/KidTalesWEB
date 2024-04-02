@@ -14,7 +14,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
-import { AuthService, Credential } from '../../../core/services/auth.service';
+import { AuthService } from '../../../core/services/auth.service';
 
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
@@ -39,7 +39,8 @@ interface ForgotForm {
   ],
   selector: 'app-forgotpassword',
   templateUrl: './forgotpassword.component.html',
-  styleUrls: ['./forgotpassword.component.css']
+  styleUrls: ['./forgotpassword.component.css'],
+  providers: [],
 })
 export class ForgotpasswordComponent {
 

@@ -93,7 +93,6 @@ export const routes: Routes = [
   declarations: [
     HomeComponent,
     AboutComponent,
-    ForgotpasswordComponent,
     PagenotfoundComponent,
     SupportComponent,
     AtetionclientComponent,
@@ -104,6 +103,7 @@ export const routes: Routes = [
   ],
   imports: [
     BrowserModule,
+    ForgotpasswordComponent,
     RouterModule.forRoot(routes),
     JoinComponent,
     LoginComponent,
