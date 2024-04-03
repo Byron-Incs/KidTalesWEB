@@ -73,12 +73,20 @@ export const routes: Routes = [
                 component: ConfigurationComponent
             },
             {
-                path: 'payment-details',
-                component: PaymentDetailsComponent
+                path: 'editUser/:userId',
+                component: UserComponent
             },
             {
-                path: 'edit/:userId',
-                component: UserComponent
+                path: 'editAtention/:userId',
+                component: AtetionclientComponent
+            },
+            {
+                path: 'editConfig/:userId',
+                component: ConfigurationComponent
+            },
+            {
+                path: 'payment-details',
+                component: PaymentDetailsComponent
             },
         ]
     },
