@@ -10,7 +10,7 @@ import { SupportComponent } from './Pages/homePages/support/support.component';
 import { AtetionclientComponent } from './Pages/userPages/atetionclient/atetionclient.component';
 import { ConfigurationComponent } from './Pages/userPages/configuration/configuration.component';
 import { PaymentDetailsComponent } from './Pages/userPages/payment-details/payment-details.component';
-import { SubUserComponent } from './Pages/userPages/sub-user/sub-user.component';
+
 import { UserComponent } from './Pages/userPages/user/user.component';
 
 import { RouterModule, Routes } from '@angular/router';
@@ -77,8 +77,8 @@ export const routes: Routes = [
                 component: PaymentDetailsComponent
             },
             {
-                path: 'sub-user',
-                component: SubUserComponent
+                path: 'edit/:userId',
+                component: UserComponent
             },
         ]
     },
@@ -98,7 +98,6 @@ export const routes: Routes = [
     AtetionclientComponent,
     ConfigurationComponent,
     PaymentDetailsComponent,
-    SubUserComponent,
     UserComponent,
   ],
   imports: [

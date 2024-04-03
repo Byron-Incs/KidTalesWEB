@@ -49,10 +49,6 @@
                                                     class="bi bi-person fa-fw me-2"></i>Mi Perfil</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="user/sub-user"><i
-                                                    class="bi bi-people fa-fw me-2"></i>Niño</a>
-                                        </li>
-                                        <li class="nav-item">
                                             <a class="nav-link" href="user/payment-details"><i
                                                     class="bi bi-wallet fa-fw me-2"></i>Métodos de Pago</a>
                                         </li>
@@ -103,8 +99,6 @@
                                 <form class="row g-3">
                                     <!-- Profile photo -->
                                     <div class="col-12">
-                                        <label class="form-label">Actualiza tu foto de perfil<span
-                                                class="text-danger">*</span></label>
                                         <div class="d-flex align-items-center">
                                             <label class="position-relative me-4" for="uploadfile-1"
                                                 title="Replace this pic">
@@ -115,19 +109,15 @@
                                                         src="../../assets/images/index/fotoperfil.jpeg" alt="">
                                                 </span>
                                             </label>
-                                            <!-- Upload button -->
-                                            <label class="btn btn-sm btn-primary-soft mb-0"
-                                                for="uploadfile-1">Change</label>
-                                            <input id="uploadfile-1" class="form-control d-none" type="file">
                                         </div>
                                     </div>
 
                                     <!-- Name -->
                                     <div class="col-md-6">
-                                        <label class="form-label">Nombre Completo<span
+                                        <label class="form-label">Nombre<span
                                                 class="text-danger">*</span></label>
                                         <input type="text" class="form-control" value="Jacqueline Miller"
-                                            placeholder="Enter your full name">
+                                            placeholder="Ingresa tu nombre">
                                     </div>
 
                                     <!-- Email -->
@@ -135,48 +125,17 @@
                                         <label class="form-label">Correo Electronico<span
                                                 class="text-danger">*</span></label>
                                         <input type="email" class="form-control" value="hello@gmail.com"
-                                            placeholder="Enter your email id">
+                                            placeholder="Ingresa tu correo">
                                     </div>
 
-                                    <!-- Date of birth -->
+                                    <!-- Phone number -->
                                     <div class="col-md-6">
-                                        <label class="form-label">Fecha de Nacimiento<span
+                                        <label class="form-label">Número de teléfono<span
                                                 class="text-danger">*</span></label>
-                                        <input type="text" class="form-control flatpickr" value="29 Aug 1996"
-                                            placeholder="Enter date of birth" data-date-format="d M Y">
+                                        <input type="number" class="form-control" value="5555555555"
+                                            placeholder="Ingresa tu número de teléfono">
                                     </div>
-
-                                    <!-- Gender -->
-                                    <div class="col-md-6">
-                                        <label class="form-label">Selección de genero<span
-                                                class="text-danger">*</span></label>
-                                        <div class="d-flex gap-4">
-                                            <div class="form-check radio-bg-light">
-                                                <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                                    id="flexRadioDefault1" checked="">
-                                                <label class="form-check-label" for="flexRadioDefault1">
-                                                    Masculino
-                                                </label>
-                                            </div>
-                                            <div class="form-check radio-bg-light">
-                                                <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                                    id="flexRadioDefault2">
-                                                <label class="form-check-label" for="flexRadioDefault2">
-                                                    Femenino
-                                                </label>
-                                            </div>
-                                            <div class="form-check radio-bg-light">
-                                                <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                                    id="flexRadioDefault3">
-                                                <label class="form-check-label" for="flexRadioDefault3">
-                                                    Otros
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-
+                                    
                                     <!-- Button -->
                                     <div class="col-12 text-end">
                                         <a href="#" class="btn btn-primary mb-0">Guardar Cambios</a>
@@ -203,7 +162,7 @@
                                 <div class="mb-3">
                                     <label class="form-label">Contraseña actual</label>
                                     <input class="form-control" type="password"
-                                        placeholder="ingrese la contraseña actual">
+                                        placeholder="Ingrese la contraseña actual">
                                 </div>
                                 <!-- New password -->
                                 <div class="mb-3">
