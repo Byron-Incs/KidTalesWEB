@@ -96,19 +96,18 @@ export class JoinComponent {
 
   async signUp(): Promise<void> {
     if (this.form.invalid) return;
-
+  
     const credential: Credential = {
       email: this.form.value.email || '',
       password: this.form.value.password || '',
-    }
-
+    };
+  
     try {
-      await this.authService.signUpWithEmailAndPassword(
-        credential
-      );
-      this.authService.login();
+      await this.authService.signUpWithEmailAndPassword(credential);
+      await this.authService.login();
+  
       const snackBarRef = this.openSnackBar();
-
+  
       snackBarRef.afterDismissed().subscribe(() => {
         this._router.navigateByUrl('user/user');
       });
