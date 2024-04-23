@@ -96,23 +96,29 @@ export class JoinComponent {
 
   async signUp(): Promise<void> {
     if (this.form.invalid) return;
-  
+
     const credential: Credential = {
       email: this.form.value.email || '',
       password: this.form.value.password || '',
     };
-  
+
     try {
       await this.authService.signUpWithEmailAndPassword(credential);
       await this.authService.login();
-  
+
       const snackBarRef = this.openSnackBar();
-  
+
       snackBarRef.afterDismissed().subscribe(() => {
         this._router.navigateByUrl('user/user');
       });
     } catch (error) {
-      console.error(error);
+      if (error.code === 'auth/email-already-in-use') {
+        this._snackBar.open('El correo electrónico ya está registrado.', 'Cerrar', {
+          duration: 2500,
+        });
+      } else {
+        console.error(error);
+      }
     }
   }
 

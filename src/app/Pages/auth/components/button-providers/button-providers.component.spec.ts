@@ -3,8 +3,9 @@ import { Component, Input, inject } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AuthService } from '../../../../core/services/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
-export type Provider = 'ios' | 'google';
+export type Provider = 'google';
 
 @Component({
   standalone: true,
@@ -18,12 +19,11 @@ export class ButtonProviders {
 
   private _authService = inject(AuthService);
   private _router = inject(Router);
+  private _snackBar = inject(MatSnackBar);
 
   providerAction(provider: Provider): void {
     if (provider === 'google') {
       this.signUpWithGoogle();
-    } else {
-      this.signUpWithIos();
     }
   }
 
@@ -33,17 +33,10 @@ export class ButtonProviders {
       this._router.navigateByUrl('/');
       console.log(result);
     } catch (error) {
-      console.log(error);
-    }
-  }
-
-  async signUpWithIos(): Promise<void> {
-    try {
-      const result = await this._authService.signInWithIosProvider();
-      this._router.navigateByUrl('/');
-      console.log(result);
-    } catch (error) {
-      console.log(error);
+      this._snackBar.open('Ocurrió un error al iniciar sesión con Google. Inténtalo nuevamente.', 'Cerrar', {
+        duration: 2500,
+      });
+      console.error(error);
     }
   }
 }

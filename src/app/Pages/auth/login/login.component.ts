@@ -20,6 +20,8 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { ButtonProviders } from '../components/button-providers/button-providers.component';
 
+import { MatSnackBarRef } from '@angular/material/snack-bar';
+
 interface LogInForm {
   email: FormControl<string>;
   password: FormControl<string>;
@@ -81,26 +83,43 @@ export class LoginComponent {
 
   async logIn(): Promise<void> {
     if (this.form.invalid) return;
-
+  
     const credential: Credential = {
       email: this.form.value.email || '',
       password: this.form.value.password || '',
     };
-
+  
     try {
       await this.authService.logInWithEmailAndPassword(credential);
-      const snackBarRef = this.openSnackBar();
-
+      const snackBarRef = this.openSnackBar('Sesión iniciada correctamente ');
+  
       snackBarRef.afterDismissed().subscribe(() => {
         this.router.navigateByUrl('user/user');
       });
     } catch (error) {
-      console.error(error);
+      if (error.code === 'auth/wrong-password') {
+        this.showPasswordError();
+      } else if (error.code === 'auth/user-not-found') {
+        this._snackBar.open('El correo electrónico no está registrado.', 'Cerrar', {
+          duration: 2500,
+        });
+      } else {
+        console.error(error);
+      }
+    }
+  }
+  
+  showPasswordError(): void {
+    this.form.get('password').setValue('');
+  
+    const passwordError = this.form.get('password').errors?.['wrongPassword'];
+    if (!passwordError) {
+      this.form.get('password').setErrors({ wrongPassword: true });
     }
   }
 
-  openSnackBar() {
-    return this._snackBar.open('Sesión iniciada correctamente 😀', 'Cerrar', {
+  openSnackBar(message: string): MatSnackBarRef<any> {
+    return this._snackBar.open(message, 'Cerrar', {
       duration: 2500,
       verticalPosition: 'top',
       horizontalPosition: 'end',
