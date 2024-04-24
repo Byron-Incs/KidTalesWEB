@@ -100,6 +100,7 @@ export class LoginComponent {
         this._snackBar.open('Correo electrónico o contraseña incorrecta.', 'Cerrar', {
           duration: 2500,
         });
+        this.form.get('password').reset();
       } else {
         console.error(error);
       }
