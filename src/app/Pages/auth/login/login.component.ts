@@ -90,15 +90,16 @@ export class LoginComponent {
 
     try {
       await this.authService.logInWithEmailAndPassword(credential);
-      this.errorMessage = null;
       const snackBarRef = this.openSnackBar();
 
       snackBarRef.afterDismissed().subscribe(() => {
         this.router.navigateByUrl('user/user');
       });
     } catch (error) {
-      if (error.code === 'auth/wrong-password' || error.code === 'auth/user-not-found') {
-        this.errorMessage = 'Correo electrónico o contraseña incorrecta.';
+      if (error.code === 'auth/invalid-credential') {
+        this._snackBar.open('Correo electrónico o contraseña incorrecta.', 'Cerrar', {
+          duration: 2500,
+        });
       } else {
         console.error(error);
       }
