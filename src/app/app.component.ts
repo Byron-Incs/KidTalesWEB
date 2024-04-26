@@ -17,15 +17,16 @@ import { onAuthStateChanged } from 'firebase/auth';
   styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit {
+
   title = 'KidTalesWEB';
 
   isLoggedIn = false;
   loading = true;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService) {
+  }
 
   ngOnInit() {
-    // this.authService.isLoggedIn$.subscribe(isLoggedIn => this.isLoggedIn = isLoggedIn);
     const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
       this.isLoggedIn = user != undefined && user != null;

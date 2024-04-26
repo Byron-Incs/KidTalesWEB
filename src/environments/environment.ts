@@ -2,6 +2,7 @@ export const environment = {
   firebase: {
     apiKey: "AIzaSyByRMv40h5tVDQkI5vwtQLT1DfWWvCnOAc",
     authDomain: "kid-tales1.firebaseapp.com",
+    databaseURL: "https://kid-tales1-default-rtdb.firebaseio.com",
     projectId: "kid-tales1",
     storageBucket: "kid-tales1.appspot.com",
     messagingSenderId: "539360258544",
