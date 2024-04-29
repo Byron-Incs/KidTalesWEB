@@ -16,10 +16,12 @@ import { AuthService, Credential } from '../../../core/services/auth.service';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { ButtonProviders } from '../components/button-providers/button-providers.component';
+import { UserService } from '../../../core/services/user.service';
+import { User } from '../../../core/models/user.interface';
 
 interface SignUpForm {
   email: FormControl<string>;
-  nombre: FormControl<string>;
+  username: FormControl<string>;
   password: FormControl<string>;
 }
 
@@ -47,12 +49,14 @@ export class JoinComponent {
 
   formBuilder = inject(FormBuilder);
 
+  private readonly userService = inject(UserService);
+
   form: FormGroup<SignUpForm> = this.formBuilder.group({
     email: this.formBuilder.control('', {
       validators: [Validators.required, Validators.email],
       nonNullable: true,
     }),
-    nombre: this.formBuilder.control('', {
+    username: this.formBuilder.control('', {
       validators: Validators.required,
       nonNullable: true,
     }),
@@ -106,6 +110,8 @@ export class JoinComponent {
       await this.authService.signUpWithEmailAndPassword(credential);
       await this.authService.login();
 
+      this.saveDeck();
+
       const snackBarRef = this.openSnackBar();
 
       snackBarRef.afterDismissed().subscribe(() => {
@@ -113,7 +119,8 @@ export class JoinComponent {
       });
     } catch (error) {
       if (error.code === 'auth/email-already-in-use') {
-        this._snackBar.open('El correo electrónico ya está registrado.', 'Cerrar', {
+        this._snackBar
+        .open('El correo electrónico ya está registrado.', 'Cerrar', {
           duration: 2500,
         });
       } else {
@@ -123,10 +130,16 @@ export class JoinComponent {
   }
 
   openSnackBar() {
-    return this._snackBar.open('Registrado con éxito 😀', 'Cerrar', {
+    return this._snackBar
+    .open('Registrado con éxito 😀', 'Cerrar', {
       duration: 2500,
       verticalPosition: 'top',
       horizontalPosition: 'end',
     });
+  }
+
+  saveDeck() {
+    this.userService.addUser(this.form.value as User)
+    .subscribe((res => console.log));
   }
 }
