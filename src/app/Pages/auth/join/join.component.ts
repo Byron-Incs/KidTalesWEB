@@ -45,6 +45,21 @@ interface SignUpForm {
 })
 
 export class JoinComponent {
+
+  defaultUser: User = {
+    adventure_stories_history: [],
+    email: '',
+    fantasy_stories_history: [],
+    horror_stories_history: [],
+    language: 'español',
+    parentalPassword: "",
+    phoneNum: null,
+    plan: false,
+    romance_stories_history: [],
+    timeLimit: 0,
+    username: '',
+  };
+
   hide = true;
 
   formBuilder = inject(FormBuilder);
@@ -139,7 +154,13 @@ export class JoinComponent {
   }
 
   saveDeck() {
-    this.userService.addUser(this.form.value as User)
+    const userToSave: User = {
+      ...this.defaultUser,
+      email: this.form.value.email,
+      username: this.form.value.username,
+    } as User;
+    
+    this.userService.addUser(userToSave)
     .subscribe((res => console.log));
   }
 }
