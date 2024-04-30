@@ -122,10 +122,14 @@ export class JoinComponent {
     };
 
     try {
-      await this.authService.signUpWithEmailAndPassword(credential);
+      const userCredential = await this.authService.signUpWithEmailAndPassword(credential);
+      const user = userCredential.user;
+
       await this.authService.login();
 
-      this.saveDeck();
+      const uid = user.uid;
+
+      this.saveDeck(uid);
 
       const snackBarRef = this.openSnackBar();
 
@@ -153,14 +157,13 @@ export class JoinComponent {
     });
   }
 
-  saveDeck() {
+  async saveDeck(uidu: string) {
     const userToSave: User = {
       ...this.defaultUser,
       email: this.form.value.email,
       username: this.form.value.username,
     } as User;
     
-    this.userService.addUser(userToSave)
-    .subscribe((res => console.log));
+    await this.userService.addUser(userToSave, uidu);
   }
 }
