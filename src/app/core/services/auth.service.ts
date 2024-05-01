@@ -9,7 +9,7 @@ import { Auth,
          signInWithPopup,
          sendPasswordResetEmail,
         } from '@angular/fire/auth';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, map } from 'rxjs';
 
 export interface Credential {
   email: string;
@@ -23,9 +23,13 @@ export interface Credential {
 export class AuthService {
   private auth: Auth = inject(Auth);
   private readonly _isLoggedIn = new BehaviorSubject<boolean>(false);
+  private readonly _currentUserUid = new BehaviorSubject<string | null>(null);
 
   readonly authState$ = authState(this.auth);
   readonly isLoggedIn$ = this._isLoggedIn.asObservable();
+
+  readonly currentUserUid$: Observable<string | null> = this._currentUserUid.asObservable().pipe(
+    map(uid => uid));
 
   signUpWithEmailAndPassword(credential: Credential): Promise<UserCredential> {
     return createUserWithEmailAndPassword(
@@ -52,12 +56,6 @@ export class AuthService {
 
     return this.callPopUp(provider);
   }
-
-  /*signInWithIosProvider(): Promise<UserCredential> {
-    const provider = new AppleAuthProvider();
-
-    return this.callPopUp(provider);
-  }*/
 
   async callPopUp(provider: AuthProvider): Promise<UserCredential> {
     try {
