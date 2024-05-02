@@ -25,7 +25,7 @@
 
                                 <!-- Edit profile button -->
                                 <div class="position-absolute top-0 end-0 p-3">
-                                    <a href="#" class="text-primary-hover" data-bs-toggle="tooltip"
+                                    <a [routerLink]="'/user/user/' + userId" class="text-primary-hover" data-bs-toggle="tooltip"
                                         data-bs-title="Edit profile">
                                         <i class="bi bi-pencil-square"></i>
                                     </a>
@@ -41,7 +41,7 @@
                                                 src="../../assets/images/index/fotoperfil.jpeg" alt="">
                                         </div>
                                         <h6 class="mb-0">{{user.username}}</h6>
-                                        <a href="#" class="text-reset text-primary-hover small">{{user.email}}</a>
+                                        <a [routerLink]="'/user/user/' + userId" class="text-reset text-primary-hover small">{{user.email}}</a>
                                         <hr>
                                     </div>
 
@@ -100,11 +100,11 @@
                             <!-- Card body START -->
                             <div class="card-body">
                                 <!-- Form START -->
-                                <form class="row g-3">
+                                <form class="row g-3" [formGroup]="form">
                                     <!-- Profile photo -->
                                     <div class="col-12">
                                         <div class="d-flex align-items-center">
-                                            <label class="position-relative me-4" for="uploadfile-1"
+                                            <mat-label class="position-relative me-4" for="uploadfile-1"
                                                 title="Replace this pic">
                                                 <!-- Avatar place holder -->
                                                 <span class="avatar avatar-xl">
@@ -112,31 +112,37 @@
                                                         class="avatar-img rounded-circle border border-white border-3 shadow"
                                                         src="../../assets/images/index/fotoperfil.jpeg" alt="">
                                                 </span>
-                                            </label>
+                                            </mat-label>
                                         </div>
                                     </div>
 
                                     <!-- Name -->
                                     <div class="col-md-6">
-                                        <label class="form-label">Nombre<span
-                                                class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" value="{{user.username}}"
-                                            placeholder="Ingresa tu nombre">
+                                        <mat-form-field class="w-100">
+                                            <mat-label class="form-label">Nombre</mat-label>
+                                            <input matInput class="form-control" [(ngModel)]="user.username"
+                                                formControlName="username"/>
+                                            <mat-error>Este campo es requerrido</mat-error>
+                                        </mat-form-field>
                                     </div>
 
                                     <!-- Email -->
                                     <div class="col-md-6">
-                                        <label class="form-label">Correo Electronico</label>
-                                        <input type="email" class="form-control" value="{{user.email}}"
+                                        <mat-form-field class="w-100">
+                                        <mat-label class="form-label">Correo Electronico</mat-label>
+                                        <input matInput class="form-control" value="{{user.email}}"
                                             disabled>
+                                        </mat-form-field>
                                     </div>
 
                                     <!-- Phone number -->
                                     <div class="col-md-6">
-                                        <label class="form-label">Número de teléfono<span
-                                                class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" value="{{user.phoneNum}}"
-                                            placeholder="Ingresa tu número de teléfono">
+                                        <mat-form-field class="w-100">
+                                            <mat-label class="form-label">Número de teléfono</mat-label>
+                                            <input matInput class="form-control" [(ngModel)]="user.phoneNum"
+                                                placeholder="Ingresa tu número de teléfono" formControlName="phoneNum"/>
+                                            <mat-error>Este campo es requerrido</mat-error>
+                                        </mat-form-field>
                                     </div>
                                     
                                     <!-- Button -->
