@@ -91,34 +91,27 @@
 						<!-- Card body START -->
 						<div class="card-body">
 							<!-- Form START -->
-							<form class="row g-3">
+							<form class="row g-3" [formGroup]="form">
 					
 
 								<!-- Control parental -->
 								<div class="col-md-6">
-									<label class="form-label">Tiempo en pantalla<span class="text-danger">*</span></label>
-									<input type="number" class="form-control" value="{{user.timeLimit}}">
+                                    <mat-form-field class="w-100">
+                                        <mat-label class="form-label">Tiempo en pantalla</mat-label>
+                                        <input matInput type="number" class="form-control" [(ngModel)]="user.timeLimit"
+                                        formControlName="timeLimit"/>
+                                        <mat-error>Este campo es requerrido</mat-error>
+                                    </mat-form-field>
 								</div>
 
 								<!-- Nationality -->
 								<div class="col-md-6">
-									<label class="form-label">Seleccione el Idioma<span class="text-danger">*</span></label>
-                                    <div class="d-flex gap-4">
-										<div class="form-check radio-bg-light">
-											<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"
-                                            [checked]="user?.language === 'español'">
-											<label class="form-check-label" for="flexRadioDefault1">
-												Español
-											</label>
-										</div>
-										<div class="form-check radio-bg-light">
-											<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
-											<label class="form-check-label" for="flexRadioDefault2">
-												Inglés
-											</label>
-										</div>
-									</div>
-								</div>
+                                    <mat-label>Seleccione el Idioma</mat-label>
+                                    <mat-radio-group [name]="'idioma'" value="{{user.language}}">
+                                      <mat-radio-button value="español">Español</mat-radio-button>
+                                      <mat-radio-button value="inglés">Inglés</mat-radio-button>
+                                    </mat-radio-group>
+                                </div>
 
 
 

@@ -91,7 +91,6 @@ export const routes: Routes = [
     AboutComponent,
     PagenotfoundComponent,
     SupportComponent,
-    ConfigurationComponent,
   ],
   imports: [
     BrowserModule,
@@ -102,6 +101,7 @@ export const routes: Routes = [
     UserComponent,
     AtetionclientComponent,
     PaymentDetailsComponent,
+    ConfigurationComponent,
   ],
   providers: [],
   bootstrap: []
