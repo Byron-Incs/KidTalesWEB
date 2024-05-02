@@ -27,25 +27,4 @@ export class ConfigurationComponent {
     const id = this.activatedRoute.snapshot.params['id'];
     this.userService.deleteUser(id);
   }
-
-  onlyPositiveIntegers(event: KeyboardEvent) {
-    const user = this.userSubject.getValue();
-    if (!user) {
-      return;
-    }
-  
-    const inputValue = (event.target as HTMLInputElement).value as string;
-  
-    const allowedKeys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'Backspace', 'Delete'];
-    if (!allowedKeys.includes(event.key)) {
-      event.preventDefault();
-    }
-
-    if (inputValue && !/^\d+$/.test(inputValue)) {
-      this.userSubject.next({ ...user, timeLimit: this.prevTimeLimit });
-    } else {
-      this.prevTimeLimit = parseInt(inputValue, 10);
-      this.userSubject.next({ ...user, timeLimit: this.prevTimeLimit });
-    }
-  }
 }
