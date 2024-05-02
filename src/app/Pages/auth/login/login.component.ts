@@ -89,11 +89,13 @@ export class LoginComponent {
     };
 
     try {
-      await this.authService.logInWithEmailAndPassword(credential);
+      const userCredential = await this.authService.logInWithEmailAndPassword(credential);
+      const user = userCredential.user;
+      const uid = user.uid;
       const snackBarRef = this.openSnackBar();
 
       snackBarRef.afterDismissed().subscribe(() => {
-        this.router.navigateByUrl('user/user');
+        this.router.navigateByUrl('user/user/' + uid);
       });
     } catch (error) {
       if (error.code === 'auth/invalid-credential') {

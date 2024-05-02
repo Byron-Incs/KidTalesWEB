@@ -1,4 +1,5 @@
- <!-- **************** MAIN CONTENT START **************** -->
+@if (user$ | async; as user) {
+<!-- **************** MAIN CONTENT START **************** -->
  <main>
 	
     <!-- =======================
@@ -35,24 +36,28 @@
                                         <div class="avatar avatar-xl mb-2">
                                             <img class="avatar-img rounded-circle border border-2 border-white" src="../../assets/images/index/fotoperfil.jpeg" alt="">
                                         </div>
-                                        <h6 class="mb-0">Jacqueline Miller</h6>
-                                        <a href="#" class="text-reset text-primary-hover small">hellogmail.com</a>
+                                        <h6 class="mb-0">{{user.username}}</h6>
+                                        <a href="#" class="text-reset text-primary-hover small">{{user.email}}</a>
                                         <hr>
                                     </div>
     
                                     <!-- Sidebar menu item START -->
                                     <ul class="nav nav-pills-primary-soft flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="user/user"><i class="bi bi-person fa-fw me-2"></i>Mi perfil</a>
+                                            <a class="nav-link" [routerLink]="'/user/user/' + userId"><i
+                                                    class="bi bi-person fa-fw me-2"></i>Mi Perfil</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="user/payment-details"><i class="bi bi-wallet fa-fw me-2"></i>Método de pago</a>
+                                            <a class="nav-link" [routerLink]="'/user/payment-details/' + userId"><i
+                                                    class="bi bi-wallet fa-fw me-2"></i>Métodos de Pago</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="user/atetionclient"><i class="bi bi-heart fa-fw me-2"></i>Atención al cliente</a>
+                                            <a class="nav-link" [routerLink]="'/user/atetionclient/' + userId"><i
+                                                    class="bi bi-heart fa-fw me-2"></i>Atención al cliente</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link active" href="user/configuration"><i class="bi bi-gear fa-fw me-2"></i>Configuración</a>
+                                            <a class="nav-link active" [routerLink]="'/user/configuration/' + userId"><i
+                                                    class="bi bi-gear fa-fw me-2"></i>Configuración</a>
                                         </li>
                                     </ul>
                                     <!-- Sidebar menu item END -->
@@ -89,32 +94,27 @@
 							<form class="row g-3">
 					
 
-								<!-- Nationality -->
+								<!-- Control parental -->
 								<div class="col-md-6">
 									<label class="form-label">Tiempo en pantalla<span class="text-danger">*</span></label>
-									<select class="form-select js-choice">
-										<option selected value="">Seleccione el tiempo máximo</option>
-										<option>1hr</option>
-										<option >2hr</option>
-										<option>3hr</option>
-										<option>indefinido</option>
-									</select>
+									<input type="number" class="form-control" value="{{user.timeLimit}}">
 								</div>
 
-								<!-- Gender -->
+								<!-- Nationality -->
 								<div class="col-md-6">
 									<label class="form-label">Seleccione el Idioma<span class="text-danger">*</span></label>
-									<div class="d-flex gap-4">
+                                    <div class="d-flex gap-4">
 										<div class="form-check radio-bg-light">
-											<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked="">
+											<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"
+                                            [checked]="user?.language === 'español'">
 											<label class="form-check-label" for="flexRadioDefault1">
-												Inglés
+												Español
 											</label>
 										</div>
 										<div class="form-check radio-bg-light">
 											<input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
 											<label class="form-check-label" for="flexRadioDefault2">
-												Español
+												Inglés
 											</label>
 										</div>
 									</div>
@@ -147,9 +147,9 @@
                             <div class="card-body">
                                 <!-- Active sessions -->
                                 <form>
-                                    <h6>Desactivar sesiones</h6>
-                                    <p class="mb-2">Al seleccionar "Cerrar sesión", cerrará sesión en todos los dispositivos excepto en este. Esto puede tardar hasta 10 minutos.</p>
-                                    <button class="btn btn-sm btn-danger mb-0">Cerrar sesión</button>
+                                    <h6>Eliminar sesión</h6>
+                                    <p class="mb-2">Al seleccionar "Eliminar sesión", eliminará la sesión en todos los dispositivos. Esto puede tardar unos minutos.</p>
+                                    <button class="btn btn-sm btn-danger mb-0" type="button" (click)="deleteUser()">Eliminar sesión</button>
                                 </form>
                             </div>
                             <!-- Card body END -->
@@ -170,3 +170,4 @@
     
     </main>
     <!-- **************** MAIN CONTENT END **************** -->
+}

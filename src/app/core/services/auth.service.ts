@@ -39,12 +39,12 @@ export class AuthService {
       );
   }
 
-  logInWithEmailAndPassword(credential: Credential){
-    return signInWithEmailAndPassword(
-      this.auth,
-      credential.email,
-      credential.password
-    ) .then(() => this.login());
+  logInWithEmailAndPassword(credential: Credential): Promise<UserCredential> {
+    return signInWithEmailAndPassword(this.auth, credential.email, credential.password)
+      .then((userCredential) => {
+        this.login();
+        return userCredential;
+      });
   }
 
   logOut(): Promise<void>{

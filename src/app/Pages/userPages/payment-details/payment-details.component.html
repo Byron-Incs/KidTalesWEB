@@ -1,3 +1,5 @@
+  
+  @if (user$ | async; as user) {
   <!-- **************** MAIN CONTENT START **************** -->
   <main>
 	
@@ -35,24 +37,28 @@
                                         <div class="avatar avatar-xl mb-2">
                                             <img class="avatar-img rounded-circle border border-2 border-white" src="../../assets/images/index/fotoperfil.jpeg" alt="">
                                         </div>
-                                        <h6 class="mb-0">Jacqueline Miller</h6>
-                                        <a href="#" class="text-reset text-primary-hover small">hellogmail.com</a>
+                                        <h6 class="mb-0">{{user.username}}</h6>
+                                        <a href="#" class="text-reset text-primary-hover small">{{user.email}}</a>
                                         <hr>
                                     </div>
     
                                     <!-- Sidebar menu item START -->
                                     <ul class="nav nav-pills-primary-soft flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="user/user"><i class="bi bi-person fa-fw me-2"></i>Mi perfil</a>
+                                            <a class="nav-link" [routerLink]="'/user/user/' + userId"><i
+                                                    class="bi bi-person fa-fw me-2"></i>Mi Perfil</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link active" href="user/payment-details"><i class="bi bi-wallet fa-fw me-2"></i>Métodos de pago</a>
+                                            <a class="nav-link active" [routerLink]="'/user/payment-details/' + userId"><i
+                                                    class="bi bi-wallet fa-fw me-2"></i>Métodos de Pago</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="user/atetionclient"><i class="bi bi-heart fa-fw me-2"></i>Atención al cliente</a>
+                                            <a class="nav-link" [routerLink]="'/user/atetionclient/' + userId"><i
+                                                    class="bi bi-heart fa-fw me-2"></i>Atención al cliente</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="user/configuration"><i class="bi bi-gear fa-fw me-2"></i>Configuración</a>
+                                            <a class="nav-link" [routerLink]="'/user/configuration/' + userId"><i
+                                                    class="bi bi-gear fa-fw me-2"></i>Configuración</a>
                                         </li>
                                     </ul>
                                     <!-- Sidebar menu item END -->
@@ -209,3 +215,4 @@
     
     </main>
     <!-- **************** MAIN CONTENT END **************** -->
+  }

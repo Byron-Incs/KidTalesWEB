@@ -1,3 +1,5 @@
+@if (user$ | async; as user) {
+
 <!-- **************** MAIN CONTENT START **************** -->
 <main>
     <!-- =======================
@@ -29,7 +31,7 @@
                                     </a>
                                 </div>
 
-                                <!-- Card body START -->
+                                    <!-- Card body START -->
                                 <div class="card-body p-3">
                                     <!-- Avatar and content -->
                                     <div class="text-center mb-3">
@@ -38,33 +40,34 @@
                                             <img class="avatar-img rounded-circle border border-2 border-white"
                                                 src="../../assets/images/index/fotoperfil.jpeg" alt="">
                                         </div>
-                                        <h6 class="mb-0">Jacqueline Miller</h6>
-                                        <a href="#" class="text-reset text-primary-hover small">hellogmailcom</a>
+                                        <h6 class="mb-0">{{user.username}}</h6>
+                                        <a href="#" class="text-reset text-primary-hover small">{{user.email}}</a>
                                         <hr>
                                     </div>
 
                                     <!-- Sidebar menu item START -->
                                     <ul class="nav nav-pills-primary-soft flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link active" href="user/user"><i
+                                            <a class="nav-link active" [routerLink]="'/user/user/' + userId"><i
                                                     class="bi bi-person fa-fw me-2"></i>Mi Perfil</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="user/payment-details"><i
+                                            <a class="nav-link" [routerLink]="'/user/payment-details/' + userId"><i
                                                     class="bi bi-wallet fa-fw me-2"></i>Métodos de Pago</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="user/atetionclient"><i
+                                            <a class="nav-link" [routerLink]="'/user/atetionclient/' + userId"><i
                                                     class="bi bi-heart fa-fw me-2"></i>Atención al cliente</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="user/configuration"><i
+                                            <a class="nav-link" [routerLink]="'/user/configuration/' + userId"><i
                                                     class="bi bi-gear fa-fw me-2"></i>Configuración</a>
                                         </li>
                                     </ul>
                                     <!-- Sidebar menu item END -->
                                 </div>
                                 <!-- Card body END -->
+                                
                             </div>
                         </div>
                     </div>
@@ -117,23 +120,22 @@
                                     <div class="col-md-6">
                                         <label class="form-label">Nombre<span
                                                 class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" value="Jacqueline Miller"
+                                        <input type="text" class="form-control" value="{{user.username}}"
                                             placeholder="Ingresa tu nombre">
                                     </div>
 
                                     <!-- Email -->
                                     <div class="col-md-6">
-                                        <label class="form-label">Correo Electronico<span
-                                                class="text-danger">*</span></label>
-                                        <input type="email" class="form-control" value="hello@gmail.com"
-                                            placeholder="Ingresa tu correo">
+                                        <label class="form-label">Correo Electronico></label>
+                                        <input type="email" class="form-control" value="{{user.email}}"
+                                            disabled>
                                     </div>
 
                                     <!-- Phone number -->
                                     <div class="col-md-6">
                                         <label class="form-label">Número de teléfono<span
                                                 class="text-danger">*</span></label>
-                                        <input type="number" class="form-control" value="5555555555"
+                                        <input type="text" class="form-control" value="{{user.phoneNum}}"
                                             placeholder="Ingresa tu número de teléfono">
                                     </div>
                                     
@@ -148,47 +150,6 @@
                         </div>
                         <!-- Personal info END -->
 
-                        <!-- Update Password START -->
-                        <div class="card border">
-                            <!-- Card header -->
-                            <div class="card-header border-bottom">
-                                <h4 class="card-header-title">Actualizar contraseña</h4>
-                                <p class="mb-0">Correo electrónico actual es <span
-                                        class="text-primary">examplegmail.com</span></p>
-                            </div>
-
-                            <!-- Card body START -->
-                            <form class="card-body">
-                                <!-- Current password -->
-                                <div class="mb-3">
-                                    <label class="form-label">Contraseña actual</label>
-                                    <input class="form-control" type="password"
-                                        placeholder="Ingrese la contraseña actual">
-                                </div>
-                                <!-- New password -->
-                                <div class="mb-3">
-                                    <label class="form-label">Introduzca nueva contraseña</label>
-                                    <div class="input-group">
-                                        <input class="form-control fakepassword"
-                                            placeholder="Introduzca nueva contraseña" type="password" id="psw-input">
-                                        <span class="input-group-text p-0 bg-transparent">
-                                            <i class="fakepasswordicon fas fa-eye-slash cursor-pointer p-2"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                                <!-- Confirm -->
-                                <div class="mb-3">
-                                    <label class="form-label">Confirme su contraseña</label>
-                                    <input class="form-control" type="password" placeholder="Confirme su contraseña">
-                                </div>
-
-                                <div class="text-end">
-                                    <a href="#" class="btn btn-primary mb-0">Cambiar Contraseña</a>
-                                </div>
-                            </form>
-                            <!-- Card body END -->
-                        </div>
-                        <!-- Update Password END -->
                     </div>
                 </div>
                 <!-- Main content END -->
@@ -201,3 +162,4 @@
 
 </main>
 <!-- **************** MAIN CONTENT END **************** -->
+}

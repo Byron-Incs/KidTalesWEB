@@ -61,19 +61,19 @@ export const routes: Routes = [
         canActivate: [authGuard],
         children: [
             {
-                path: 'user',
+                path: 'user/:id',
                 component: UserComponent
             },
             {
-                path: 'atetionclient',
+                path: 'atetionclient/:id',
                 component: AtetionclientComponent
             },
             {
-                path: 'configuration',
+                path: 'configuration/:id',
                 component: ConfigurationComponent
             },
             {
-                path: 'payment-details',
+                path: 'payment-details/:id',
                 component: PaymentDetailsComponent
             },
         ]
@@ -91,10 +91,7 @@ export const routes: Routes = [
     AboutComponent,
     PagenotfoundComponent,
     SupportComponent,
-    AtetionclientComponent,
     ConfigurationComponent,
-    PaymentDetailsComponent,
-    UserComponent,
   ],
   imports: [
     BrowserModule,
@@ -102,6 +99,9 @@ export const routes: Routes = [
     RouterModule.forRoot(routes),
     JoinComponent,
     LoginComponent,
+    UserComponent,
+    AtetionclientComponent,
+    PaymentDetailsComponent,
   ],
   providers: [],
   bootstrap: []

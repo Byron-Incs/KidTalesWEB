@@ -134,7 +134,7 @@ export class JoinComponent {
       const snackBarRef = this.openSnackBar();
 
       snackBarRef.afterDismissed().subscribe(() => {
-        this._router.navigateByUrl('user/user');
+        this._router.navigateByUrl('user/user/' + uid);
       });
     } catch (error) {
       if (error.code === 'auth/email-already-in-use') {
