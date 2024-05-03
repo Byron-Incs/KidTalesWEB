@@ -23,7 +23,7 @@ export class ButtonProviders {
     if (provider === 'google') {
       this.signUpWithGoogle();
     } else {
-      //this.signUpWithIos();
+      //
     }
   }
 
@@ -36,14 +36,4 @@ export class ButtonProviders {
     }
   }
 
-  /*
-  async signUpWithIos(): Promise<void> {
-    try {
-      const result = await this._authService.signInWithIosProvider();
-      this._router.navigateByUrl('/');
-      console.log(result);
-    } catch (error) {
-      console.log(error);
-    }
-  }*/
 }
