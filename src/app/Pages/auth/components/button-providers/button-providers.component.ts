@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 
 import { AuthService } from '../../../../core/services/auth.service';
 
-export type Provider = 'github' | 'google';
+export type Provider = 'google';
 
 @Component({
   standalone: true,
