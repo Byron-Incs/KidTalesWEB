@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { Firestore, collection, collectionData, doc, setDoc } from '@angular/fire/firestore';
 import { User } from '../models/user.interface';
 import { Observable, from, map } from 'rxjs';
-import { deleteDoc, getDoc } from 'firebase/firestore';
+import { deleteDoc, getDoc, updateDoc } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -24,8 +24,13 @@ export class UserService {
     );
   }
 
+  updateUser(user: User, id: string){
+    const docRef = doc(this.firestore, 'users', id);
+    updateDoc(docRef, { ...user });
+  }
+
   deleteUser(id: string){
-    const docrRef = doc(this.firestore, 'users', id);
-    deleteDoc(docrRef);
+    const docRef = doc(this.firestore, 'users', id);
+    deleteDoc(docRef);
   }
 }

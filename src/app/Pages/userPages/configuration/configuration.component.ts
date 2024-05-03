@@ -58,11 +58,22 @@ export class ConfigurationComponent {
   ngOnInit() {
     const id = this.activatedRoute.snapshot.params['id'];
     this.userId = id;
-    this.userService.getUser(id).subscribe(user => this.userSubject.next(user));
+    this.userService
+    .getUser(id)
+    .subscribe(user => this.userSubject.next(user));
+    
+    this.userService
+    .getUser(this.userId)
+    .subscribe((data) => this.form.patchValue(data));
   }
 
   deleteUser() {
     const id = this.activatedRoute.snapshot.params['id'];
     this.userService.deleteUser(id);
+  }
+
+  updateUser(){
+    this.userService
+    .updateUser(this.form.value as User, this.userId);
   }
 }

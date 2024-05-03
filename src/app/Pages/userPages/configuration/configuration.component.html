@@ -107,7 +107,7 @@
 								<!-- Nationality -->
 								<div class="col-md-6">
                                     <mat-label>Seleccione el Idioma</mat-label>
-                                    <mat-radio-group [name]="'idioma'" value="{{user.language}}">
+                                    <mat-radio-group [name]="'language'" value="{{user.language}}">
                                       <mat-radio-button value="español">Español</mat-radio-button>
                                       <mat-radio-button value="inglés">Inglés</mat-radio-button>
                                     </mat-radio-group>
@@ -117,7 +117,7 @@
 
 								<!-- Button -->
 								<div class="col-12 text-end">
-									<a href="#" class="btn btn-primary mb-0">Guardar Cambios</a>
+									<a (click)="updateUser()" class="btn btn-primary mb-0">Guardar Cambios</a>
 								</div>
 							</form>
 							<!-- Form END -->

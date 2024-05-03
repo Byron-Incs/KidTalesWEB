@@ -65,6 +65,13 @@ export class UserComponent {
     this.userId! = this.activatedRoute.snapshot.params['id'];
     this.user$ = this.userService.getUser(id);
     
-    this.userService.getUser(this.userId).subscribe((data) => console.log(data))
+    this.userService
+    .getUser(this.userId)
+    .subscribe((data) => this.form.patchValue(data))
+  }
+
+  updateUser(){
+    this.userService
+    .updateUser(this.form.value as User, this.userId);
   }
 }

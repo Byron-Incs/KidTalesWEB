@@ -6,7 +6,7 @@ export interface User {
   horror_stories_history: string[];
   language: string;
   parentalPassword?: string;
-  phoneNum: number;
+  phoneNum: string;
   plan: boolean;
   romance_stories_history: string[];
   timeLimit: number;
