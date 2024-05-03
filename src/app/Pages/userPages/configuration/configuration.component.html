@@ -23,7 +23,7 @@
     
                                 <!-- Edit profile button -->
                                 <div class="position-absolute top-0 end-0 p-3">
-                                    <a href="#" class="text-primary-hover" data-bs-toggle="tooltip" data-bs-title="Edit profile">
+                                    <a [routerLink]="'/user/user/' + userId" class="text-primary-hover" data-bs-toggle="tooltip" data-bs-title="Edit profile">
                                         <i class="bi bi-pencil-square"></i>
                                     </a>
                                 </div>
@@ -111,7 +111,7 @@
                                     <mat-label>Seleccione el Idioma</mat-label>
                                     <mat-radio-group formControlName="language" value="{{ user.language }}">
                                         <mat-radio-button value="español">Español</mat-radio-button>
-                                        <mat-radio-button value="ingles">Inglés</mat-radio-button>
+                                        <mat-radio-button value="english">English</mat-radio-button>
                                     </mat-radio-group>
                                 </div>
 
