@@ -7,7 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { ButtonProviders } from '../../auth/components/button-providers/button-providers.component';
 import { AsyncPipe, NgIf } from '@angular/common';
 import { MatRadioModule } from '@angular/material/radio';
@@ -38,6 +38,8 @@ interface ConfigForm {
   styleUrls: ['./configuration.component.css'],
 })
 export class ConfigurationComponent {
+
+  private snackBar = inject(MatSnackBar);
 
   formBuilder = inject(FormBuilder);
   private readonly userService = inject(UserService);
@@ -91,10 +93,25 @@ export class ConfigurationComponent {
 
   updateUser() {
     if (this.form.invalid) {
+      this.snackBar.open('Los datos son inválidos', 'Cerrar', {
+        duration: 2500,
+      });
       return;
     }
   
     const updatedUser = this.form.value as User;
-    this.userService.updateUser(updatedUser, this.userId);
+  
+    this.userService.updateUser(updatedUser, this.userId)
+      .then(() => {
+        this.snackBar.open('Cambios guardados correctamente.', 'Cerrar', {
+          duration: 2500,
+        });
+      })
+      .catch((error) => {
+        console.error('Error al actualizar usuario:', error);
+        this.snackBar.open('No se pudieron guardar los cambios.', 'Cerrar', {
+          duration: 2500,
+        });
+      });
   }
 }

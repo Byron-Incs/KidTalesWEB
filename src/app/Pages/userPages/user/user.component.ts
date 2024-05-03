@@ -16,7 +16,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { ButtonProviders } from '../../auth/components/button-providers/button-providers.component';
 
 interface UserForm {
@@ -44,6 +44,8 @@ interface UserForm {
 })
 export class UserComponent {
 
+  private snackBar = inject(MatSnackBar);
+
   formBuilder = inject(FormBuilder);
 
   private activatedRoute = inject(ActivatedRoute);
@@ -70,8 +72,23 @@ export class UserComponent {
     .subscribe((data) => this.form.patchValue(data))
   }
 
-  updateUser(){
-    this.userService
-    .updateUser(this.form.value as User, this.userId);
+  updateUser() {
+    if (this.form.valid) {
+      this.userService.updateUser(this.form.value as User, this.userId)
+        .then(() => {
+          this.snackBar.open('Usuario actualizado exitosamente', 'Cerrar', {
+            duration: 2500,
+          });
+        })
+        .catch((error) => {
+          this.snackBar.open('Error al actualizar usuario', 'Cerrar', {
+            duration: 2500,
+          });
+        });
+    } else {
+      this.snackBar.open('Los datos son inválidos', 'Cerrar', {
+        duration: 2500,
+      });
+    }
   }
 }

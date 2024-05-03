@@ -24,9 +24,9 @@ export class UserService {
     );
   }
 
-  updateUser(user: User, id: string){
+  updateUser(user: User, id: string): Promise<void> {
     const docRef = doc(this.firestore, 'users', id);
-    updateDoc(docRef, { ...user });
+    return Promise.resolve(updateDoc(docRef, { ...user }));
   }
 
   deleteUser(id: string){
