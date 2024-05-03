@@ -100,7 +100,9 @@
                                         <mat-label class="form-label">Tiempo en pantalla</mat-label>
                                         <input matInput type="number" class="form-control" [(ngModel)]="user.timeLimit"
                                         formControlName="timeLimit"/>
-                                        <mat-error>Este campo es requerrido</mat-error>
+                                        <mat-error *ngIf="form.get('timeLimit').hasError('required')">Este campo es requerrido</mat-error>
+                                        <mat-error *ngIf="form.get('timeLimit').hasError('nonPositive')">Debe ser un número positivo</mat-error>
+                                        <mat-error *ngIf="form.get('timeLimit').hasError('notInteger')">Debe ser un número entero</mat-error>
                                     </mat-form-field>
 								</div>
 

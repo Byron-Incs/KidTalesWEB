@@ -47,13 +47,30 @@ export class ConfigurationComponent {
   userId!: string;
 
   timeLimitConfig = {
-    validators: Validators.required,
+    validators: [Validators.required, this.validatePositiveInteger],
   };
 
   form: FormGroup<ConfigForm> = this.formBuilder.group({
-    timeLimit: this.formBuilder.control(0, { validators: Validators.required }),
+    timeLimit: this.formBuilder.control(0, this.timeLimitConfig),
     language: new FormControl(''),
   });
+
+  validatePositiveInteger(control: FormControl) {
+    const value = control.value;
+    if (value === null || value === undefined) {
+      return null;
+    }
+  
+    if (value <= -1) {
+      return { nonPositive: true };
+    }
+  
+    if (!Number.isInteger(value)) {
+      return { notInteger: true };
+    }
+  
+    return null;
+  }
 
   ngOnInit() {
     const id = this.activatedRoute.snapshot.params['id'];
@@ -72,8 +89,12 @@ export class ConfigurationComponent {
     this.userService.deleteUser(id);
   }
 
-  updateUser(){
-    this.userService
-    .updateUser(this.form.value as User, this.userId);
+  updateUser() {
+    if (this.form.invalid) {
+      return;
+    }
+  
+    const updatedUser = this.form.value as User;
+    this.userService.updateUser(updatedUser, this.userId);
   }
 }
