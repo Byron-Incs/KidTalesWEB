@@ -107,9 +107,9 @@
 								<!-- Nationality -->
 								<div class="col-md-6">
                                     <mat-label>Seleccione el Idioma</mat-label>
-                                    <mat-radio-group [name]="'language'" value="{{user.language}}">
-                                      <mat-radio-button value="español">Español</mat-radio-button>
-                                      <mat-radio-button value="inglés">Inglés</mat-radio-button>
+                                    <mat-radio-group formControlName="language" value="{{ user.language }}">
+                                        <mat-radio-button value="español">Español</mat-radio-button>
+                                        <mat-radio-button value="ingles">Inglés</mat-radio-button>
                                     </mat-radio-group>
                                 </div>
 
