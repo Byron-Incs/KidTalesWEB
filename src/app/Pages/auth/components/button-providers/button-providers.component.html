@@ -1,26 +1,7 @@
-<!-- Google and iOS button -->
+<!-- Google button -->
 <div class="vstack gap-3">
     <button class="btn btn-light" (click)="providerAction('google')">
         <i class="fab fa-fw fa-google text-dark"></i>
         {{ isLogin ? "Inicia sesión con" : "Regístrate con" }} Google
     </button>
-
-    <!--
-    <button class="btn btn-light" >
-        <i class="fab fa-fw fa-apple text-dark"></i>
-        {{ isLogin ? "Inicia sesión con" : "Regístrate con" }} iOS
-    </button>
-    -->
 </div>
-
-
-<!-- <div class="vstack gap-3">
-    <button (click)="providerAction('google')" >
-        <i class="fab fa-fw fa-google text-google-icon me-2"></i>
-            <span>{{ isLogin ? "Inicia con" : "Regístrate con" }} con Google</span>
-    </button>
-    <button>
-        <i class="fab fa-fw fa-apple text-apple-icon me-2"></i>
-            <span>{{ isLogin ? "Inicia con" : "Regístrate con" }} con iOS</span>
-    </button>
-</div> -->
