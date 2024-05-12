@@ -9,13 +9,14 @@ import { PagenotfoundComponent } from './Pages/commponents/pagenotfound/pagenotf
 import { SupportComponent } from './Pages/homePages/support/support.component';
 import { AtetionclientComponent } from './Pages/userPages/atetionclient/atetionclient.component';
 import { ConfigurationComponent } from './Pages/userPages/configuration/configuration.component';
-import { PaymentDetailsComponent } from './Pages/userPages/payment-details/payment-details.component';
+import { PaymentDetailsComponent } from './Pages/userPages/payments/payment-details/payment-details.component';
 
 import { UserComponent } from './Pages/userPages/user/user.component';
 
 import { RouterModule, Routes } from '@angular/router';
 
 import { authGuard, publicGuard } from './core/guards';
+import { ActivatedPlanComponent } from './Pages/userPages/payments/activated-plan/activated-plan.component';
 
 export const routes: Routes = [
     {
@@ -72,9 +73,19 @@ export const routes: Routes = [
                 path: 'configuration/:id',
                 component: ConfigurationComponent
             },
+        ]
+    },
+    {
+        path: 'user/payment-details',
+        canActivate: [authGuard],
+        children: [
             {
-                path: 'payment-details/:id',
+                path: 'free/:id',
                 component: PaymentDetailsComponent
+            },
+            {
+                path: 'plan/:id',
+                component: ActivatedPlanComponent,
             },
         ]
     },
@@ -102,6 +113,7 @@ export const routes: Routes = [
     AtetionclientComponent,
     PaymentDetailsComponent,
     ConfigurationComponent,
+    ActivatedPlanComponent,
   ],
   providers: [],
   bootstrap: []

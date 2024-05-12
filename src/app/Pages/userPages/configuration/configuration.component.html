@@ -48,8 +48,10 @@
                                                     class="bi bi-person fa-fw me-2"></i>Mi Perfil</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" [routerLink]="'/user/payment-details/' + userId"><i
+                                            <a *ngIf="!hasPlan" class="nav-link" [routerLink]="'/user/payment-details/free/' + userId"><i
                                                     class="bi bi-wallet fa-fw me-2"></i>Métodos de Pago</a>
+                                            <a *ngIf="hasPlan" class="nav-link" [routerLink]="'/user/payment-details/plan/' + userId"><i
+                                                        class="bi bi-wallet fa-fw me-2"></i>Métodos de Pago</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" [routerLink]="'/user/atetionclient/' + userId"><i

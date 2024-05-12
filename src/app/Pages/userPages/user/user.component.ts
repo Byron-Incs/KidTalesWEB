@@ -8,7 +8,7 @@ import {
 } from '@angular/forms';
 import { UserService } from '../../../core/services/user.service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { User } from '../../../core/models/user.interface';
 import { AsyncPipe } from '@angular/common';
 import { NgIf } from '@angular/common';
@@ -52,6 +52,8 @@ export class UserComponent {
   private readonly userService = inject(UserService);
   user$!: Observable<User>;
   userId!: string;
+  originalPlan!: boolean;
+  hasPlan!: boolean;
 
   form: FormGroup<UserForm> = this.formBuilder.group({
     username: this.formBuilder.control('', {
@@ -65,11 +67,13 @@ export class UserComponent {
     const id = this.activatedRoute.snapshot.params['id'];
 
     this.userId! = this.activatedRoute.snapshot.params['id'];
-    this.user$ = this.userService.getUser(id);
-    
-    this.userService
-    .getUser(this.userId)
-    .subscribe((data) => this.form.patchValue(data))
+    this.user$ = this.userService.getUser(id).pipe(
+      tap((data) => {
+        this.form.patchValue(data);
+        this.originalPlan = data.plan;
+        this.hasPlan = this.originalPlan;
+      })
+    );
   }
 
   updateUser() {

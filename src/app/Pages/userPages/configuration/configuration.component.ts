@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { UserService } from '../../../core/services/user.service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { User } from '../../../core/models/user.interface';
@@ -47,6 +47,8 @@ export class ConfigurationComponent {
   private userSubject = new BehaviorSubject<User | null>(null);
   user$ = this.userSubject.asObservable();
   userId!: string;
+  originalPlan!: boolean;
+  hasPlan!: boolean;
 
   timeLimitConfig = {
     validators: [Validators.required, this.validatePositiveInteger],
@@ -81,9 +83,13 @@ export class ConfigurationComponent {
     .getUser(id)
     .subscribe(user => this.userSubject.next(user));
     
-    this.userService
-    .getUser(this.userId)
-    .subscribe((data) => this.form.patchValue(data));
+    this.user$ = this.userService.getUser(id).pipe(
+      tap((data) => {
+        this.form.patchValue(data);
+        this.originalPlan = data.plan;
+        this.hasPlan = this.originalPlan;
+      })
+    );
   }
 
   deleteUser() {

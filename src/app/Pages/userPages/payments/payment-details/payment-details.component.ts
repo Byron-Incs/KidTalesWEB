@@ -1,9 +1,9 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { UserService } from '../../../core/services/user.service';
+import { UserService } from '../../../../core/services/user.service';
 import { Observable } from 'rxjs';
-import { User } from '../../../core/models/user.interface';
+import { User } from '../../../../core/models/user.interface';
 import { GooglePayButtonModule } from '@google-pay/button-angular';
 
 @Component({
