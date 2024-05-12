@@ -112,7 +112,15 @@
                             <h5>$9.99 <span class="small fs-6">Plan Premium</span></h5>
                         
                             <p class="mb-3"><strong>Proceder al pago:</strong>  Haga clic en el botón de pago a continuación para proceder al pago con Google Pay</p>
-                            <a href="#" class="btn btn-sm btn-outline-primary mb-0">Pago con Google Pay</a>
+                            <google-pay-button
+                            environment="TEST"
+                            buttonColor="black"
+                            buttonType="buy"
+                            [paymentRequest]="paymentRequest" [style.width.px]="buttonWidth"
+                            (loadpaymentdata)="onLoadPaymentData($event)"
+                            >
+
+                            </google-pay-button>
                         </div>
                     </div>
                 </div>
