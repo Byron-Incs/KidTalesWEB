@@ -69,7 +69,6 @@ export class PaymentDetailsComponent {
     console.log(event, ">> Data");
 
     console.log('Payment successful:', event.detail);
-    const paymentDetails = event.detail.paymentData;
 
     this.userService.updateUserPlan(this.userId, true)
       .then(() => {
