@@ -5,6 +5,7 @@ import { UserService } from '../../../../core/services/user.service';
 import { Observable } from 'rxjs';
 import { User } from '../../../../core/models/user.interface';
 import { GooglePayButtonModule } from '@google-pay/button-angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-payment-details',
@@ -20,6 +21,7 @@ import { GooglePayButtonModule } from '@google-pay/button-angular';
 export class PaymentDetailsComponent {
   private activatedRoute = inject(ActivatedRoute);
   private readonly userService = inject(UserService);
+  private router = inject(Router);
   user$!: Observable<User>;
   userId!: string;
 
@@ -38,8 +40,8 @@ export class PaymentDetailsComponent {
       {
         type: 'CARD',
         parameters: {
-          allowedAuthMethods: ['PAN_ONLY', 'CRYPTOGRAM_3DS'],
-          allowedCardNetworks: ['AMEX', 'VISA', 'MASTERCARD']
+          allowedAuthMethods: ["PAN_ONLY", "CRYPTOGRAM_3DS"],
+          allowedCardNetworks: ["AMEX", "DISCOVER", "INTERAC", "JCB", "MASTERCARD", "VISA"]
         },
         tokenizationSpecification: {
           type: 'PAYMENT_GATEWAY',
@@ -65,5 +67,17 @@ export class PaymentDetailsComponent {
 
   onLoadPaymentData(event: any) {
     console.log(event, ">> Data");
+
+    console.log('Payment successful:', event.detail);
+
+    this.userService.updateUserPlan(this.userId, true)
+      .then(() => {
+        console.log('User plan updated successfully');
+        this.router.navigate(['/user/payment-details/plan/' + this.userId]);
+      })
+      .catch(error => {
+        console.error('Error updating user plan:', error);
+      });
   }
 }
+
