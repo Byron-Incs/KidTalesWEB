@@ -49,6 +49,7 @@ export class JoinComponent {
   defaultUser: User = {
     adventure_stories_history: [],
     email: '',
+    dateOfPurchase: '',
     fantasy_stories_history: [],
     horror_stories_history: [],
     language: 'español',

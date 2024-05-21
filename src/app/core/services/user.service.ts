@@ -34,8 +34,8 @@ export class UserService {
     deleteDoc(docRef);
   }
 
-  updateUserPlan(userId: string, newPlanValue: boolean): Promise<void> {
+  updateUserPlan(userId: string, newPlanValue: boolean, dateOfPurchase: string): Promise<void> {
     const userRef = doc(this.firestore, 'users', userId);
-    return updateDoc(userRef, { plan: newPlanValue });
-}
+    return updateDoc(userRef, { plan: newPlanValue, dateOfPurchase });
+  }
 }

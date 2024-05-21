@@ -7,6 +7,7 @@ import { User } from '../../../../core/models/user.interface';
 import { GooglePayButtonModule } from '@google-pay/button-angular';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-payment-details',
   standalone: true,
@@ -18,14 +19,16 @@ import { Router } from '@angular/router';
   templateUrl: './payment-details.component.html',
   styleUrl: './payment-details.component.css'
 })
+
 export class PaymentDetailsComponent {
+
   private activatedRoute = inject(ActivatedRoute);
   private readonly userService = inject(UserService);
   private router = inject(Router);
   user$!: Observable<User>;
   userId!: string;
 
-  ngOnInit(){
+  ngOnInit() {
     const id = this.activatedRoute.snapshot.params['id'];
     this.userId! = this.activatedRoute.snapshot.params['id'];
     this.user$ = this.userService.getUser(id);
@@ -67,10 +70,14 @@ export class PaymentDetailsComponent {
 
   onLoadPaymentData(event: any) {
     console.log(event, ">> Data");
-
     console.log('Payment successful:', event.detail);
 
-    this.userService.updateUserPlan(this.userId, true)
+    const fechaISO = new Date();
+    const fechaISOString = fechaISO.toISOString();
+    const partesFecha = fechaISOString.split('T');
+    const fechaModificada = partesFecha[0] + ' ' + partesFecha[1].replace('Z', '');
+
+    this.userService.updateUserPlan(this.userId, true, fechaModificada)
       .then(() => {
         console.log('User plan updated successfully');
         this.router.navigate(['/user/payment-details/plan/' + this.userId]);

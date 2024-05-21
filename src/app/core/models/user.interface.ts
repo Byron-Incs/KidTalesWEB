@@ -1,5 +1,6 @@
 export interface User {
   email: string;
+  dateOfPurchase: string;
   username: string;
   adventure_stories_history: string[];
   fantasy_stories_history: string[];
