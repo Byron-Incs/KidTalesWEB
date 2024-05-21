@@ -48,7 +48,7 @@
                         <a class="nav-link" [routerLink]="'/user/user/' + userId"><i class="bi bi-person fa-fw me-2"></i>Mi Perfil</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link active" [routerLink]="'/user/payment-details/plan/' + userId"><i class="bi bi-wallet fa-fw me-2"></i>Subscripccion</a>
+                        <a class="nav-link active" [routerLink]="'/user/payment-details/plan/' + userId"><i class="bi bi-wallet fa-fw me-2"></i>Suscripción</a>
                       </li>
                       <li class="nav-item">
                         <a class="nav-link" [routerLink]="'/user/atetionclient/' + userId"><i class="bi bi-heart fa-fw me-2"></i>Atención al cliente</a>
@@ -79,7 +79,7 @@
             <div class="card border bg-transparent">
               <!-- Card header -->
               <div class="card-header bg-transparent border-bottom">
-                <h4 class="card-header-title">Mi Subscripción</h4>
+                <h4 class="card-header-title">Mi Suscripción</h4>
               </div>
   
               <!-- Card body START -->
@@ -93,7 +93,7 @@
                     <a class="nav-link mb-0" data-bs-toggle="tab" href="#tab-2"><i class="bi bi-star fa-fw me-1"></i>Detalles del plan</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link mb-0" data-bs-toggle="tab" href="#tab-3"><i class="bi bi-x-octagon fa-fw me-1"></i>Cancelar Subscripccion</a>
+                    <a class="nav-link mb-0" data-bs-toggle="tab" href="#tab-3"><i class="bi bi-x-octagon fa-fw me-1"></i>Cancelar suscripción</a>
                   </li>
                 </ul>
   
@@ -118,18 +118,18 @@
                             <!-- Card title -->
                             <div>
                               <ul class="nav nav-divider h6 fw-normal mb-2">
-                                <h4><li class="nav-item">450$</li></h4>
+                                <h4><li class="nav-item">400$</li></h4>
                               </ul>
                             </div>
                           </div>
                           <!-- List -->
                           <ul class="list-group list-group-borderless mt-2 mb-0">
                             <li class="list-group-item d-flex pb-0 mb-0">
-                                <span class="h6 fw-normal mb-0"><i class="bi bi-check-circle me-2"></i>Tu plan inicio el: <span class="text-danger fw-bold">24 de febrero del 2024</span></span> 
+                                <span class="h6 fw-normal mb-0"><i class="bi bi-check-circle me-2"></i>Tu plan inicio el: <span class="text-danger fw-bold">{{ formattedDate }}</span></span> 
                             </li>
                             <br>
                             <li class="list-group-item d-flex pb-0 mb-0">
-                                <span class="h6 fw-normal mb-0"><i class="bi bi-check-circle me-2"></i>Tu plan acaba el: <span class="text-danger fw-bold">24 de Marzo del 2024</span></span> 
+                                <span class="h6 fw-normal mb-0"><i class="bi bi-check-circle me-2"></i>Tu plan acaba el: <span class="text-danger fw-bold">{{ formattedEndDate }}</span></span> 
                             </li>
 
                           </ul>
@@ -207,7 +207,7 @@
                         </div>
                         <!-- Button -->
                         <div class="mt-2 mt-md-0">
-                            <button class="btn btn-md btn-danger mb-0" type="button">Cancelar Plan</button>
+                            <button class="btn btn-md btn-danger mb-0" type="button" (click)="cancelPlan()">Cancelar Plan</button>
                         </div>
                     </div>
                     

@@ -5,6 +5,7 @@ import { UserService } from '../../../../core/services/user.service';
 import { Observable } from 'rxjs';
 import { User } from '../../../../core/models/user.interface';
 import { GooglePayButtonModule } from '@google-pay/button-angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-activated-plan',
@@ -21,14 +22,56 @@ import { GooglePayButtonModule } from '@google-pay/button-angular';
 export class ActivatedPlanComponent {
   private activatedRoute = inject(ActivatedRoute);
   private readonly userService = inject(UserService);
+  private router = inject(Router);
   user$!: Observable<User>;
   userId!: string;
+  dateOfPurchase!: Date;
+  endDate!: Date;
+  formattedDate!: string;
+  formattedEndDate!: string;
 
-  ngOnInit(){
+  ngOnInit() {
     const id = this.activatedRoute.snapshot.params['id'];
     this.userId! = this.activatedRoute.snapshot.params['id'];
     this.user$ = this.userService.getUser(id);
+
+    this.user$.subscribe(user => {
+      if (user) {
+        this.dateOfPurchase = new Date(user.dateOfPurchase);
+        this.endDate = calculateEndDate(this.dateOfPurchase);
+        this.formattedDate = new Date(this.dateOfPurchase).toLocaleDateString('es-MX', {
+          day: 'numeric',
+          month: 'long',
+          year: 'numeric'
+        });
+        this.formattedEndDate = new Date(this.endDate).toLocaleDateString('es-MX', {
+          day: 'numeric',
+          month: 'long',
+          year: 'numeric'
+        });
+      }
+    });
+
+    function calculateEndDate(dateOfPurchase: Date): Date {
+      const currentMonth = dateOfPurchase.getMonth();
+      const currentYear = dateOfPurchase.getFullYear();
+
+      let nextMonth = currentMonth + 1;
+      let nextYear = currentYear;
+
+      if (nextMonth === 12) {
+        nextMonth = 0;
+        nextYear++;
+      }
+
+      const endDate = new Date(nextYear, nextMonth, 1);
+
+      endDate.setDate(endDate.getDate() + (endDate.getMonth() === nextMonth ? Math.max(dateOfPurchase.getDate(), endDate.getDate()) : 0));
+
+      return endDate;
+    }
   }
+
 
   buttonWidth = 240;
 
@@ -76,9 +119,21 @@ export class ActivatedPlanComponent {
     this.userService.updateUserPlan(this.userId, true, fechaModificada)
       .then(() => {
         console.log('User plan updated successfully');
+        this.router.navigate(['/user/payment-details/plan/' + this.userId]);
       })
       .catch(error => {
         console.error('Error updating user plan:', error);
+      });
+  }
+
+  cancelPlan() {
+    this.userService.updateUserPlan(this.userId, false, '')
+      .then(() => {
+        console.log('User plan cancelled successfully');
+        this.router.navigate(['/user/payment-details/free/' + this.userId]);
+      })
+      .catch(error => {
+        console.error('Error cancelling user plan:', error);
       });
   }
 }
