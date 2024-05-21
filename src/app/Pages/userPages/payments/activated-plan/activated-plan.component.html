@@ -141,7 +141,16 @@
                     <!-- Card footer -->
                     <div class="card-footer p-0 pt-4">             
                         <!-- Item -->
-                        <a class="btn btn-dark mb-0 mt-2">Renovar   plan</a>
+                        <p class="mb-3"><strong>Renovar pago:</strong>  Haga clic en el botón de pago a continuación para proceder al pago con Google Pay</p>
+                        <google-pay-button
+                        environment="TEST"
+                        buttonColor="black"
+                        buttonType="buy"
+                        [paymentRequest]="paymentRequest" [style.width.px]="buttonWidth"
+                        (loadpaymentdata)="onLoadPaymentData($event)"
+                        >
+
+                        </google-pay-button>
                     </div>
                   </div>
                   <!-- Tabs content item END -->
