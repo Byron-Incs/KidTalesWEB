@@ -16,6 +16,7 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } 
 interface ConfigForm {
   timeLimit: FormControl<number>;
   language: FormControl<string>;
+  readingSpeed: FormControl<number>;
 }
 
 @Component({
@@ -54,9 +55,14 @@ export class ConfigurationComponent {
     validators: [Validators.required, this.validatePositiveInteger],
   };
 
+  readingSpeed = {
+    validators: [Validators.required, this.validatePositiveInteger],
+  };
+
   form: FormGroup<ConfigForm> = this.formBuilder.group({
     timeLimit: this.formBuilder.control(0, this.timeLimitConfig),
     language: new FormControl(''),
+    readingSpeed: this.formBuilder.control(0, this.readingSpeed),
   });
 
   validatePositiveInteger(control: FormControl) {

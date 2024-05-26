@@ -99,7 +99,7 @@
 								<!-- Control parental -->
 								<div class="col-md-6">
                                     <mat-form-field class="w-100">
-                                        <mat-label class="form-label">Tiempo en pantalla</mat-label>
+                                        <mat-label class="form-label">Tiempo en pantalla (segundos)</mat-label>
                                         <input matInput type="number" class="form-control" [(ngModel)]="user.timeLimit"
                                         formControlName="timeLimit"/>
                                         <mat-error *ngIf="form.get('timeLimit').hasError('required')">Este campo es requerrido</mat-error>
@@ -117,7 +117,17 @@
                                     </mat-radio-group>
                                 </div>
 
-
+                                <!-- Reading Speed -->
+                                <div class="col-md-6">
+                                    <mat-form-field class="w-100">
+                                        <mat-label class="form-label">Velocidad de lectura (palabras/min)</mat-label>
+                                        <input matInput type="number" class="form-control" [(ngModel)]="user.readingSpeed"
+                                        formControlName="readingSpeed"/>
+                                        <mat-error *ngIf="form.get('timeLimit').hasError('required')">Este campo es requerrido</mat-error>
+                                        <mat-error *ngIf="form.get('timeLimit').hasError('nonPositive')">Debe ser un número positivo</mat-error>
+                                        <mat-error *ngIf="form.get('timeLimit').hasError('notInteger')">Debe ser un número entero</mat-error>
+                                    </mat-form-field>
+								</div>
 
 								<!-- Button -->
 								<div class="col-12 text-end">
