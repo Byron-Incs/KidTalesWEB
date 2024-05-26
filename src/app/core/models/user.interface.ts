@@ -9,6 +9,7 @@ export interface User {
   parentalPassword?: string;
   phoneNum: string;
   plan: boolean;
+  readingSpeed: number;
   romance_stories_history: string[];
   timeLimit: number;
 }

@@ -27,6 +27,7 @@ export class ButtonProviders {
     parentalPassword: '',
     phoneNum: null,
     plan: false,
+    readingSpeed: 70,
     romance_stories_history: [],
     timeLimit: 0,
     username: '',
